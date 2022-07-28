@@ -11,5 +11,7 @@ module.exports = {
     database: DB_NAME,
     host: DB_HOST,
     dialect: DB_DIALECT,
+    seederStorage: 'sequelize',
+    seederStorageTableName: 'SequelizeData',
   },
 };
