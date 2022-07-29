@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import * as endPoints from '../../config/endPoints';
 import { disableLoader, enableLoader } from '../../redux/actions/loaderAction';
 import Loader from '../Loader/Loader';
 
 function UserList() {
+  const currentUser = useSelector((store) => store.user);
   const [list, setList] = useState([]);
 
   const dispatch = useDispatch();
@@ -25,6 +26,10 @@ function UserList() {
 
   if (loader) return <Loader />;
 
+  list.forEach((user) => (
+    console.log(user.email, currentUser)
+  ));
+
   if (list.length === 0) return <p>Not users</p>;
 
   return (
@@ -32,15 +37,31 @@ function UserList() {
     <div className="d-flex justify-content-center">
       <div className="list-group">
         {list.map((user) => (
-          <Link
+          <div
             key={user.id}
             className={`list-group-item list-group-item-action ${
               userId === user.id ? 'active' : ''
             }`}
-            to={`/users/${user.id}`}
           >
-            {user.userName}
-          </Link>
+            Имя:
+            {' '}
+            <strong>{user.userName}</strong>
+            , E-Mail:
+            {' '}
+            <strong>{user.email}</strong>
+            {' '}
+            , Статус:
+            {' '}
+            <strong>{user.status ? 'разблокирован' : 'заблокирован'}</strong>
+            {user.email === currentUser.email ? (
+              <button className="btn btn-light text-primary" type="button">изменить</button>
+            ) : (
+              <>
+                <button className="btn btn-primary" type="button">изменить</button>
+                <button className="btn btn-primary" type="button">аккаунты</button>
+              </>
+            )}
+          </div>
         ))}
       </div>
     </div>
