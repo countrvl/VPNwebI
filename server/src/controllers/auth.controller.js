@@ -38,7 +38,12 @@ const signIn = async (req, res) => {
           name: currentUser.name,
         };
 
-        return res.json({ id: currentUser.id, name: currentUser.userName });
+        return res.json({
+          id: currentUser.id,
+          name: currentUser.userName,
+          status: currentUser.status,
+          adm: currentUser.adm,
+        });
       }
       return res.sendStatus(401);
     } catch (error) {
