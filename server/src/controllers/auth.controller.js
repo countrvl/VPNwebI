@@ -35,14 +35,15 @@ const signIn = async (req, res) => {
       if (currentUser && currentUser.password === sha256(password)) {
         req.session.user = {
           id: currentUser.id,
-          name: currentUser.name,
+          name: currentUser.userName,
         };
 
         return res.json({
           id: currentUser.id,
-          name: currentUser.userName,
+          userName: currentUser.userName,
           status: currentUser.status,
           adm: currentUser.adm,
+          email: currentUser.email,
         });
       }
       return res.sendStatus(401);
@@ -71,7 +72,9 @@ const signOut = async (req, res) => {
 const checkAuth = async (req, res) => {
   try {
     const user = await User.findByPk(req.session.user.id);
-    return res.json({ id: user.id, userName: user.userName });
+    return res.json({
+      id: user.id, userName: user.userName, email: user.email, status: user.status, adm: user.adm,
+    });
   } catch (error) {
     console.error(error);
     return res.sendStatus(500);

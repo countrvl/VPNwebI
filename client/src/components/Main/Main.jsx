@@ -6,9 +6,20 @@ import styles from './Main.module.css';
 
 function Main() {
   const user = useSelector((store) => store.user);
+
   return (
     <div>
-      {user ? (<p />) : (
+      {user ? (
+        <div className="d-flex justify-content-center align-items-center">
+          <h1>
+            Добро пожаловать
+            {' '}
+            {user.userName}
+            {' '}
+            в лучший VPN сервис
+          </h1>
+        </div>
+      ) : (
         <div className="d-flex justify-content-center">
           <div className={`${styles.div}`}>
             <img className="rounded-circle" src="https://img.freepik.com/premium-vector/vpn-icon-with-shield-vector_116137-3682.jpg?w=360" />
