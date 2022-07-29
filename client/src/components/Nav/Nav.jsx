@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 function Nav() {
   const user = useSelector((state) => state.user);
-  console.log(user);
+
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
       <div className="container">
@@ -23,21 +23,12 @@ function Nav() {
                       Выход
                     </NavLink>
                   </li>
-
                   <li className="nav-item">
                     <NavLink
-                      to="/user/edit"
+                      to="/personalarea"
                       className="nav-link"
                     >
-                      Edit
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/users"
-                      className="nav-link"
-                    >
-                      Users
+                      Личный кабинет
                     </NavLink>
                   </li>
                 </>
