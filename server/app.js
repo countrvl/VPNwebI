@@ -5,7 +5,7 @@ const cors = require('cors');
 const FileStore = require('session-file-store')(session);
 
 const authRouter = require('./src/routes/auth.router');
-const usersRouter = require('./src/routes/users.router');
+const lkRouter = require('./src/routes/lk.router');
 
 const app = express();
 
@@ -39,7 +39,7 @@ app.use(
 
 // APP'S ROUTES
 app.use('/auth', authRouter);
-app.use('/users', usersRouter);
+app.use('/lk', lkRouter);
 
 app.listen(PORT, () => {
   console.log('Сервер запущен на порте', PORT);
