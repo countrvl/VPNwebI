@@ -18,9 +18,11 @@ module.exports = {
       },
       adm: {
         type: Sequelize.BOOLEAN,
+        default: false,
       },
       status: {
         type: Sequelize.BOOLEAN,
+        default: true,
       },
       createdAt: {
         allowNull: false,
