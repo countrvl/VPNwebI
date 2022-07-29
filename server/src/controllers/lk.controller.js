@@ -122,6 +122,40 @@ const deleteUser = async (req, res) => {
   }
 };
 
+/// -----------все аккаунты всех юзеров -------///
+
+const getAllAccAdm = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const allAccounts = await Account.findAll({ where: { id: userId } });
+    return res.json(allAccounts);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+};
+
+/// ------------ редактирование аккаунтом админом -------//
+
+const editAccAdm = async (req, res) => {
+  let updatedFields = Object.entries(req.body).filter((el) => el[1]);
+  if (updatedFields.length) {
+    updatedFields = Object.fromEntries(updatedFields);
+    try {
+      // eslint-disable-next-line max-len
+      const [, updatedUser] = await Account.update(updatedFields, {
+        where: { id: req.params },
+        returning: true,
+        plain: true,
+        raw: true,
+      });
+      return res.json(updatedUser);
+    } catch (error) {
+      return res.sendStatus(500);
+    }
+  }
+  return res.sendStatus(418);
+};
+
 module.exports = {
   editUser, //
   editAcc, //
@@ -131,4 +165,6 @@ module.exports = {
   createAcc, //
   deleteAcc, //
   deleteUser, //
+  getAllAccAdm, //
+  editAccAdm, //
 };
