@@ -63,7 +63,7 @@ const editAcc = async (req, res) => {
 const getAllAcc = async (req, res) => {
   const { id } = req.session.user;
   try {
-    const allAccounts = await User.findAll({ where: { user_id: id } }, { include: 'Accounts' });
+    const allAccounts = await Account.findAll({ where: { user_id: id } });
     return res.json(allAccounts);
   } catch (error) {
     return res.sendStatus(500);
