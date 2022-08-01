@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as endPoints from '../../config/endPoints';
-import { disableLoader, enableLoader } from '../../redux/actions/loaderAction';
-import Loader from '../Loader/Loader';
+import { Link } from 'react-router-dom';
+import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction';
+import * as endPoints from '../../../config/endPoints';
+
+import Loader from '../../Loader/Loader';
 
 function UserList() {
   const currentUser = useSelector((store) => store.user);
@@ -11,7 +13,7 @@ function UserList() {
 
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.loader);
-  const userId = useSelector((state) => state.user.id);
+  const userId = useSelector((state) => state.user?.id);
 
   useEffect(() => {
     dispatch(enableLoader());
@@ -24,13 +26,9 @@ function UserList() {
       });
   }, []);
 
-  if (loader) return <Loader />;
+  if (loader && currentUser) return <Loader />;
 
-  list.forEach((user) => (
-    console.log(user.email, currentUser)
-  ));
-
-  if (list.length === 0) return <p>Not users</p>;
+  if (list.length === 0) return <p className="text">Not users</p>;
 
   return (
 
@@ -54,11 +52,12 @@ function UserList() {
             {' '}
             <strong>{user.status ? 'разблокирован' : 'заблокирован'}</strong>
             {user.email === currentUser.email ? (
-              <button className="btn btn-light text-primary" type="button">изменить</button>
+              <Link to="/myuser"><button className="btn btn-light text-primary ms-2" type="button">изменить</button></Link>
             ) : (
               <>
-                <button className="btn btn-primary" type="button">изменить</button>
-                <button className="btn btn-primary" type="button">аккаунты</button>
+                <Link to={`/personalarea/user/${user.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
+                <Link to={`/personalarea/admaccs/${user.id}`}><button className="btn btn-primary ms-2" type="button">аккаунты</button></Link>
+                <button className="btn btn-danger ms-2" type="button">удалить</button>
               </>
             )}
           </div>
