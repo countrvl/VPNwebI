@@ -23,8 +23,8 @@ lkRouter.route('/user/:id')
 lkRouter.post('/newacc', checkAuth, usersController.createAcc);
 lkRouter.get('/myaccs', usersController.getAllAcc);
 lkRouter.delete('/acc/:id', checkAuth, usersController.deleteAcc);
-lkRouter.patch('/myaccs/:id', checkAuth, usersController.editAcc);
+lkRouter.patch('/accs/:id', checkAuth, usersController.editAcc);
 lkRouter.get('/allaccs/:id', checkAuth, usersController.getAllAccAdm);
-lkRouter.patch('/allaccs/:id', checkAuth, usersController.editAccAdm);
+lkRouter.get('/oneacc/:id', checkAuth, usersController.getAccOne);
 
 module.exports = lkRouter;

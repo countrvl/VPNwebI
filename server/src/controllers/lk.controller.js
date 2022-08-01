@@ -45,7 +45,7 @@ const editAcc = async (req, res) => {
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await Account.update(updatedFields, {
-        where: { id: req.session.user.id },
+        where: { id: req.params },
         returning: true,
         plain: true,
         raw: true,
@@ -61,23 +61,35 @@ const editAcc = async (req, res) => {
 /// -------- все аккаунты одного пользователя -------///
 
 const getAllAcc = async (req, res) => {
-  const { userId } = req.session.user.id;
+  const { id } = req.session.user;
   try {
-    const allAccounts = await User.findAll({ where: { id: userId } }, { include: 'Accounts' });
+    const allAccounts = await Account.findAll({ where: { user_id: id } });
     return res.json(allAccounts);
   } catch (error) {
     return res.sendStatus(500);
   }
 };
 
+/// -------- вывод одного аккаунта -------///
+
+const getAccOne = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const currentAcc = await Account.findByPk(id);
+    res.json(currentAcc);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
 /// ------- создание аккаунта ------///
 
 const createAcc = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   try {
     const { acname, pass } = await req.body;
     const newAcc = await Account.create({
-      ac_name: acname, pass, user_id: userId, status: true,
+      ac_name: acname, pass, user_id: id, status: true,
     });
     return res.json({ newAcc });
   } catch (error) {
@@ -156,38 +168,16 @@ const getAllAccAdm = async (req, res) => {
   }
 };
 
-/// ------------ редактирование аккаунтом админом -------//
-
-const editAccAdm = async (req, res) => {
-  let updatedFields = Object.entries(req.body).filter((el) => el[1]);
-  if (updatedFields.length) {
-    updatedFields = Object.fromEntries(updatedFields);
-    try {
-      // eslint-disable-next-line max-len
-      const [, updatedUser] = await Account.update(updatedFields, {
-        where: { id: req.params },
-        returning: true,
-        plain: true,
-        raw: true,
-      });
-      return res.json(updatedUser);
-    } catch (error) {
-      return res.sendStatus(500);
-    }
-  }
-  return res.sendStatus(418);
-};
-
 module.exports = {
   editUser, //
   editAcc, //
   getUser, //
   getAllUsers, //
   getAllAcc, //
-  createAcc, //l
+  createAcc, //
   deleteAcc, //
   deleteUser, //
   getAllAccAdm, //
-  editAccAdm, //
   adminEditUser, //
+  getAccOne, //
 };
