@@ -1,16 +1,26 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as endPoints from '../../config/endPoints';
+import { deleteAllAccsThunk, getAllAccsThunk } from '../../redux/actions/allAccsActions&Thunks/allAccsThunks';
 
 function UserAccs() {
-  const [list, setList] = useState();
+  const list = useSelector((store) => store.allAccs);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(endPoints.getUserAllAcc(), { credentials: 'include' })
-      .then((response) => response.json())
-      .then((data) => setList(data));
+    dispatch(getAllAccsThunk());
   }, []);
+
+  useEffect(() => {
+    console.log(list);
+  });
+
+  const deleteHandler = (id) => {
+    dispatch(deleteAllAccsThunk(id));
+  };
 
   return (
     <div className="d-flex flex-column">
@@ -34,7 +44,7 @@ function UserAccs() {
               {' '}
               <strong>**********</strong>
               <Link to={`/admacc/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
-              <button className="btn btn-danger ms-2" type="button">удалить</button>
+              <button onClick={() => deleteHandler(acc.id)} className="btn btn-danger ms-2" type="button">удалить</button>
             </div>
           ))}
         </div>

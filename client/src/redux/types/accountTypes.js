@@ -1,3 +1,2 @@
-export const GET_ALL_ACC_ADMIN = 'GET_ALL_ACC_ADMIN';
-export const SET_ACC_ADMIN = 'ADD_ACC_ADMIN';
-export const DELETE_ACC = 'DELETE_ACC';
+/* eslint-disable import/prefer-default-export */
+export const GET_ALL_ACCS = 'GET_ALL_ACCS';

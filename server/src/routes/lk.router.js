@@ -10,8 +10,8 @@ const lkRouter = Router();
 lkRouter.route('/allusers')
   .get(checkAuth, usersController.getAllUsers);// админ
 
-lkRouter.route('allusers/:id')
-  .get(checkAuth, usersController.adminEditUser);
+lkRouter.route('/allusers/:id')
+  .patch(checkAuth, usersController.adminEditUser);
 
 lkRouter.route('/user/:id')
   .patch(checkAuth, checkAuthor, usersController.editUser)
@@ -22,7 +22,7 @@ lkRouter.route('/user/:id')
 
 lkRouter.post('/newacc', checkAuth, usersController.createAcc);
 lkRouter.get('/myaccs', usersController.getAllAcc);
-lkRouter.delete('/acc/:id', checkAuth, usersController.deleteAcc);
+lkRouter.delete('/accs/:id', checkAuth, usersController.deleteAcc);
 lkRouter.patch('/accs/:id', checkAuth, usersController.editAcc);
 lkRouter.get('/allaccs/:id', checkAuth, usersController.getAllAccAdm);
 lkRouter.get('/oneacc/:id', checkAuth, usersController.getAccOne);
