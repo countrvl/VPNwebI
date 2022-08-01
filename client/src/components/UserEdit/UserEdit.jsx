@@ -63,7 +63,7 @@ function UserEdit() {
         onSubmit={submitHandler}
         className="d-flex flex-column align-items-center bg-light text-dark p-3 border rounded-3"
       >
-        <legend className="text-center mb-4">User Edit</legend>
+        <legend className="text text-center mb-4">User Edit</legend>
         <div className="mb-3">
           <label htmlFor="userEditInput0" className="form-label">Электронная почта:</label>
           <input

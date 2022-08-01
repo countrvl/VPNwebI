@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import useLocalStorage from 'use-local-storage';
 import PrivateRoute from './components/PrivateRouter/PrivateRouter';
 import UserEdit from './components/UserEdit/UserEdit';
 import SignOut from './components/Forms/SignOut/SignOut';
@@ -21,9 +22,17 @@ function App() {
     dispatch(checkAuth());
   }, []);
 
+  // eslint-disable-next-line no-constant-condition
+  const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
+
+  const switchTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  };
+
   return (
-    <>
-      <Nav />
+    <div data-theme={theme}>
+      <Nav switchTheme={switchTheme} theme={theme} />
       <div className="container py-5">
         <Routes>
           <Route path="/" element={<Main />} />
@@ -36,7 +45,7 @@ function App() {
           <Route path="/auth/signin" element={<SignIn />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import * as endPoints from '../../../config/endPoints';
-import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction';
-import Loader from '../../Loader/Loader';
+import * as endPoints from '../../config/endPoints';
+import { disableLoader, enableLoader } from '../../redux/actions/loaderAction';
+import Loader from '../Loader/Loader';
 
 function UserList() {
   const currentUser = useSelector((store) => store.user);
@@ -27,7 +26,11 @@ function UserList() {
 
   if (loader) return <Loader />;
 
-  if (list.length === 0) return <p>ПУСТО</p>;
+  list.forEach((user) => (
+    console.log(user.email, currentUser)
+  ));
+
+  if (list.length === 0) return <p className="text">Not users</p>;
 
   return (
 
@@ -38,7 +41,7 @@ function UserList() {
             key={user.id}
             className={`list-group-item list-group-item-action ${
               userId === user.id ? 'active' : ''
-            } mt-1`}
+            }`}
           >
             Имя:
             {' '}
@@ -51,15 +54,11 @@ function UserList() {
             {' '}
             <strong>{user.status ? 'разблокирован' : 'заблокирован'}</strong>
             {user.email === currentUser.email ? (
-              <Link to="/myuser">
-                {' '}
-                <button className="btn btn-light text-primary ms-2" type="button">изменить</button>
-              </Link>
+              <button className="btn btn-light text-primary" type="button">изменить</button>
             ) : (
               <>
-                <Link to={`/user/${user.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
-                <Link to={`/admaccs/${user.id}`}><button className="btn btn-primary ms-2" type="button">аккаунты</button></Link>
-                <button className="btn btn-danger ms-2" type="button">удалить</button>
+                <button className="btn btn-primary" type="button">изменить</button>
+                <button className="btn btn-primary" type="button">аккаунты</button>
               </>
             )}
           </div>
