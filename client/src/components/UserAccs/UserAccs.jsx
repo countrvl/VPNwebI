@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import * as endPoints from '../../config/endPoints';
 
 function UserAccs() {
@@ -33,7 +33,6 @@ function UserAccs() {
               , Пароль:
               {' '}
               <strong>**********</strong>
-              <Link to={`/admacc/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
               <button className="btn btn-danger ms-2" type="button">удалить</button>
             </div>
           ))}
