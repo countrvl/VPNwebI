@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { disableLoader, enableLoader } from '../../redux/actions/loaderAction';
 import Loader from '../Loader/Loader';
 import * as endPoints from '../../config/endPoints';
+import { editUser } from '../../redux/actions/userAction';
 
 function UserEdit() {
   const [userEdit, setUserEdit] = useState({
@@ -44,7 +45,7 @@ function UserEdit() {
     let payload = Object.entries(userEdit);
     if (payload.length) {
       payload = Object.fromEntries(payload);
-      dispatch(endPoints.editUser(payload, navigate));
+      dispatch(editUser(payload, navigate));
     }
   };
 

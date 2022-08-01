@@ -98,7 +98,7 @@ export const editUser = (user, navigate) => async (dispatch, getState) => {
   if (response.status === 200) {
     const userData = await response.json();
     dispatch(setUser(userData));
-    navigate(`/users/${userData.id}`);
+    navigate('/personalarea');
   } else {
     navigate.replace('/');
   }

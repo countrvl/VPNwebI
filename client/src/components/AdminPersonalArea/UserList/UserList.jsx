@@ -23,12 +23,8 @@ function UserList() {
         dispatch(disableLoader());
       });
   }, []);
-  console.log(list);
-  if (loader && currentUser) return <Loader />;
 
-  list.forEach((user) => (
-    console.log(user.email, currentUser)
-  ));
+  if (loader && currentUser) return <Loader />;
 
   if (list.length === 0) return <p className="text">Not users</p>;
 
@@ -54,7 +50,7 @@ function UserList() {
             {' '}
             <strong>{user.status ? 'разблокирован' : 'заблокирован'}</strong>
             {user.email === currentUser.email ? (
-              <button className="btn btn-light text-primary" type="button">изменить</button>
+              <Link to="/myuser"><button className="btn btn-light text-primary ms-2" type="button">изменить</button></Link>
             ) : (
               <>
                 <Link to={`/personalarea/user/${user.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>

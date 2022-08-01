@@ -14,8 +14,8 @@ import AdminPersonalArearea from './components/AdminPersonalArea/AdminPersonalAr
 import AdminUserEdit from './components/AdminPersonalArea/AdminEditUser/AdminUserEdit';
 import { checkAuth } from './redux/actions/userAction';
 import AdminListAcc from './components/AdminPersonalArea/AdminListAcc/AdminListAcc';
-import AdminAccsEdit from './components/AdminPersonalArea/AdminAccsEdit/AdminAccsEdit';
 import UserPersonalArea from './components/UserPersonalArea/UserPersonalArea';
+import AccsEdit from './components/AccsEdit/AccsEdit';
 
 function App() {
   const adminStatus = useSelector((store) => store.user?.adm);
@@ -45,10 +45,10 @@ function App() {
               <Route index element={<PrivateRoute><AdminPersonalArearea /></PrivateRoute>} />
               <Route path="user/:id" element={<PrivateRoute><AdminUserEdit /></PrivateRoute>} />
               <Route path="admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} />
-              <Route path="admacc/:id" element={<PrivateRoute><AdminAccsEdit /></PrivateRoute>} />
             </Route>
           ) : <Route path="/personalarea" element={<PrivateRoute><UserPersonalArea /></PrivateRoute>} />}
 
+          <Route path="/admacc/:id" element={<PrivateRoute><AccsEdit /></PrivateRoute>} />
           <Route path="/myuser" element={<PrivateRoute><UserEdit /></PrivateRoute>} />
           <Route path="/auth/signout" element={<PrivateRoute><SignOut /></PrivateRoute>} />
           <Route path="/auth/signup" element={<SignUp />} />
