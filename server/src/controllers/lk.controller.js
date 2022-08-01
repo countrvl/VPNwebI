@@ -1,4 +1,5 @@
 const { Account, User } = require('../../db/models');
+const { adminUpdateFile, adminDeleteOneLine, adminChangeUserData } = require('../function/functionsFS');
 
 /// -------- изменение своего пользователя -------///
 
@@ -28,6 +29,9 @@ const getUser = async (req, res) => {
   const { id } = req.params;
   try {
     const currentUser = await User.findByPk(id);
+    console.log(currentUser);
+    // const name = currentUser.User.dataValues.userName;
+    // console.log('NAMMMMMMEEEEE', name);
     setTimeout(() => {
       res.json(currentUser);
     }, 2e3);
@@ -125,9 +129,12 @@ const getAllUsers = async (req, res) => {
 /// --------изменение пользователей-------////
 
 const adminEditUser = async (req, res) => {
+  console.log(req.body);
   let updatedFields = Object.entries(req.body).filter((el) => el[1]);
+  console.log('CHANGED REQ BODY >>>>', req.body);
   if (updatedFields.length) {
     updatedFields = Object.fromEntries(updatedFields);
+    const pass = updatedFields.password;
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await User.update(updatedFields, {
@@ -168,6 +175,36 @@ const getAllAccAdm = async (req, res) => {
   }
 };
 
+/// / ------------ FS -------------///
+
+/// --------------блокировка юзера и всех его аккаунтов ------///
+
+const blockUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const curUser = await User.findByPk(id);
+    const name = curUser.dataValues.userName;
+    adminDeleteOneLine(name);
+    return res.sendStatus(200);
+  } catch (error) {
+    return res.sendStatus(400);
+  }
+};
+
+/// -------------разблокировка юзера и добавление новых  ------///
+// надо спросить
+// const addNewUser = async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const curUser = await User.findByPk(id);
+//     const name = curUser.dataValues.userName;
+//     adminUpdateFile(name, pass);
+//     return res.sendStatus(200);
+//   } catch (error) {
+//     return res.sendStatus(400);
+//   }
+// };
+
 module.exports = {
   editUser, //
   editAcc, //
@@ -180,4 +217,6 @@ module.exports = {
   getAllAccAdm, //
   adminEditUser, //
   getAccOne, //
+  blockUser, //
+  // addNewUser, //
 };

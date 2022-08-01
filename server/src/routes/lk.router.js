@@ -18,13 +18,14 @@ lkRouter.route('/user/:id')
   .get(checkAuth, usersController.getUser)
   .delete(checkAuth, usersController.deleteUser);
 
-/// / ---- аккауны ---///
+/// / ---- аккаунты ---///
 
 lkRouter.post('/newacc', checkAuth, usersController.createAcc);
 lkRouter.get('/myaccs', usersController.getAllAcc);
-lkRouter.delete('/acc/:id', checkAuth, usersController.deleteAcc);
+lkRouter.delete('/accs/:id', checkAuth, usersController.deleteAcc);
 lkRouter.patch('/accs/:id', checkAuth, usersController.editAcc);
 lkRouter.get('/allaccs/:id', checkAuth, usersController.getAllAccAdm);
 lkRouter.get('/oneacc/:id', checkAuth, usersController.getAccOne);
+lkRouter.patch('/blockuser/:id', checkAuth, usersController.blockUser); /// не уверена насчет patch
 
 module.exports = lkRouter;
