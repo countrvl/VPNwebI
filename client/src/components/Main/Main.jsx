@@ -2,6 +2,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import GoogleAuth from '../Forms/GoogleAuth/GoogleAuth';
 // import styles from './Main.module.css';
 
 function Main() {
@@ -41,6 +42,17 @@ function Main() {
                   Регистрация
                 </NavLink>
               </button>
+            </div>
+            <p className="divider" />
+            <div>
+              <div className="top">
+                <GoogleAuth />
+                {/* <i className="fab fa-google" /> */}
+                <i className="fab fa-facebook-square" />
+                <i className="fab fa-linkedin" />
+                <i className="fab fa-twitter-square" />
+                <i className="fab fa-apple" />
+              </div>
             </div>
           </div>
         </div>
