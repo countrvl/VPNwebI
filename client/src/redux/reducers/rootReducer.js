@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
+import googleAuthReducer from './googleAuthReducer';
 import loaderReducer from './loaderReducer';
 import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
   loader: loaderReducer,
+  googleAuth: googleAuthReducer,
 });
 
 export default rootReducer;

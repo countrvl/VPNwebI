@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as endPoints from '../../config/endPoints';
-import { disableLoader, enableLoader } from '../../redux/actions/loaderAction';
-import Loader from '../Loader/Loader';
+import * as endPoints from '../../../config/endPoints';
+import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction';
+import Loader from '../../Loader/Loader';
 
 function UserList() {
   const currentUser = useSelector((store) => store.user);
