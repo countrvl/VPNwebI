@@ -1,14 +1,15 @@
 import React, { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
-function Nav() {
+// eslint-disable-next-line react/prop-types
+function Nav({ switchTheme, theme }) {
   const user = useSelector((state) => state.user);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
       <div className="container">
         <div className="container-fluid d-flex justify-content-between">
-          <Link className="navbar-brand" to="/">
+          <Link className={`navbar-brand-${theme}`} to="/">
             VPN Morda
           </Link>
           <div className=" navbar-collapse ms-10" id="navbarNav">
@@ -18,7 +19,7 @@ function Nav() {
                   <li className="nav-item">
                     <NavLink
                       to="/auth/signout"
-                      className="nav-link"
+                      className={`nav-link-${theme}`}
                     >
                       Выход
                     </NavLink>
@@ -26,7 +27,7 @@ function Nav() {
                   <li className="nav-item">
                     <NavLink
                       to="/personalarea"
-                      className="nav-link"
+                      className={`nav-link-${theme}`}
                     >
                       Личный кабинет
                     </NavLink>
@@ -34,12 +35,16 @@ function Nav() {
                 </>
               ) : (
                 <li className="nav-item">
-                  <NavLink to="/" className="nav-link">
+                  <NavLink to="/" className={`nav-link-${theme}`}>
                     Документация
                   </NavLink>
                 </li>
               )}
             </ul>
+          </div>
+
+          <div className="them">
+            <button type="button" onClick={switchTheme} className="fa-brands fa-telegram">button</button>
           </div>
         </div>
       </div>
