@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-function AdminAccsEdit() {
+function AccsEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -78,4 +78,4 @@ function AdminAccsEdit() {
   );
 }
 
-export default AdminAccsEdit;
+export default AccsEdit;

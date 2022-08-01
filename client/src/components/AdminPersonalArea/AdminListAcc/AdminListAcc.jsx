@@ -28,7 +28,7 @@ function AdminListAcc() {
             , Пароль:
             {' '}
             <strong>**********</strong>
-            <Link to={`/personalarea/admacc/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
+            <Link to={`/admacc/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
             <button className="btn btn-danger ms-2" type="button">удалить</button>
           </div>
         ))}
