@@ -45,7 +45,7 @@ const editAcc = async (req, res) => {
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await Account.update(updatedFields, {
-        where: { id: req.session.user.id },
+        where: { user_id: req.session.user.id },
         returning: true,
         plain: true,
         raw: true,

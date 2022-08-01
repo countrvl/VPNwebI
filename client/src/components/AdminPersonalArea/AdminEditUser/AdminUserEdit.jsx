@@ -120,26 +120,12 @@ function AdminUserEdit() {
             placeholder="Admin"
           />
         </div>
-
-        <div className="mb-3">
-          <label htmlFor="userEditInput4" className="form-label">Статус учётной записи:</label>
-
-          <input
-            onChange={changeHandler}
-            id="userEditInput4"
-            className="form-control"
-            value={userEdit.status}
-            type="text"
-            name="status"
-            placeholder="Status"
-          />
-        </div>
         <div className="d-flex justify-content-center">
           <button type="button" onClick={submitHandlerBlock} className={checkButt ? 'btn btn-primary' : 'btn btn-danger'}>
             {checkButt ? 'Разблокировать' : 'Заблокировать'}
           </button>
           <button type="submit" className="btn btn-primary ms-1">
-            Edit
+            Изменить
           </button>
         </div>
       </form>

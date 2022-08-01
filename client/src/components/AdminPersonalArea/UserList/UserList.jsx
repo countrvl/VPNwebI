@@ -12,7 +12,7 @@ function UserList() {
 
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.loader);
-  const userId = useSelector((state) => state.user.id);
+  const userId = useSelector((state) => state.user?.id);
 
   useEffect(() => {
     dispatch(enableLoader());
@@ -24,8 +24,8 @@ function UserList() {
         dispatch(disableLoader());
       });
   }, []);
-
-  if (loader) return <Loader />;
+  console.log(list);
+  if (loader && currentUser) return <Loader />;
 
   if (list.length === 0) return <p>ПУСТО</p>;
 
@@ -57,8 +57,8 @@ function UserList() {
               </Link>
             ) : (
               <>
-                <Link to={`/user/${user.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
-                <Link to={`/admaccs/${user.id}`}><button className="btn btn-primary ms-2" type="button">аккаунты</button></Link>
+                <Link to={`/personalarea/user/${user.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
+                <Link to={`/personalarea/admaccs/${user.id}`}><button className="btn btn-primary ms-2" type="button">аккаунты</button></Link>
                 <button className="btn btn-danger ms-2" type="button">удалить</button>
               </>
             )}

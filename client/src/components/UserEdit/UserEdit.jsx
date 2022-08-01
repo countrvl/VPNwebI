@@ -7,8 +7,6 @@ import Loader from '../Loader/Loader';
 import * as endPoints from '../../config/endPoints';
 
 function UserEdit() {
-  const [checkButt, setCheckButt] = useState();
-
   const [userEdit, setUserEdit] = useState({
     email: '',
     userName: '',
@@ -48,11 +46,6 @@ function UserEdit() {
       payload = Object.fromEntries(payload);
       dispatch(endPoints.editUser(payload, navigate));
     }
-  };
-
-  const submitHandlerBlock = (e) => {
-    e.preventDefault();
-    setCheckButt(!checkButt);
   };
 
   if (loader) return <Loader />;
@@ -104,11 +97,8 @@ function UserEdit() {
           />
         </div>
         <div className="d-flex justify-content-center">
-          <button type="button" onClick={submitHandlerBlock} className={checkButt ? 'btn btn-primary' : 'btn btn-danger'}>
-            {checkButt ? 'Разблокировать' : 'Заблокировать'}
-          </button>
           <button type="submit" className="btn btn-primary ms-1">
-            Edit
+            Изменить
           </button>
         </div>
       </form>
