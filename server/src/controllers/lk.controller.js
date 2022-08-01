@@ -162,7 +162,7 @@ module.exports = {
   getUser, //
   getAllUsers, //
   getAllAcc, //
-  createAcc, //
+  createAcc, //l
   deleteAcc, //
   deleteUser, //
   getAllAccAdm, //
