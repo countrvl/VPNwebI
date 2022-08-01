@@ -1,30 +1,44 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import * as endPoints from '../../config/endPoints';
+import { editAllAccsThunk } from '../../redux/actions/allAccsActions&Thunks/allAccsThunks';
 
 function AccsEdit() {
   const { id } = useParams();
+
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [checkButt, setCheckButt] = useState(false);
 
-  const [userEdit, setUserEdit] = useState({
+  const [acccEdit, setAccEdit] = useState({
     ac_name: '',
     pass: '',
-    status: '',
   });
 
+  useEffect(() => {
+    axios.get(endPoints.getOneAcc(id))
+      .then((response) => setAccEdit((prev) => ({
+        ...prev,
+        ac_name: response.data.ac_name,
+        pass: response.data.pass,
+      })));
+  }, []);
+
   const changeHandler = (e) => {
-    setUserEdit((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setAccEdit((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    let payload = Object.entries(userEdit);
+    let payload = Object.entries(acccEdit);
     if (payload.length) {
       payload = Object.fromEntries(payload);
-      // dispatch(editUser(payload, navigate));
-      console.log(id, navigate);
+      dispatch(editAllAccsThunk(id, payload, navigate));
     }
   };
 
@@ -39,14 +53,14 @@ function AccsEdit() {
         onSubmit={submitHandler}
         className="d-flex flex-column align-items-center bg-light text-dark p-3 border rounded-3"
       >
-        <legend className="text-center mb-4">User Edit</legend>
+        <legend className="text-center mb-4">Изменение аккаунта</legend>
         <div className="mb-3">
           <label htmlFor="userEditInput0" className="form-label">Имя аккаунта:</label>
           <input
             onChange={changeHandler}
             id="userEditInput0"
             className="form-control"
-            value={userEdit.ac_name}
+            value={acccEdit.ac_name}
             type="text"
             name="ac_name"
             placeholder="Логин"
@@ -59,8 +73,8 @@ function AccsEdit() {
             onChange={changeHandler}
             id="userEditInput1"
             className="form-control"
-            value={userEdit.pass}
-            type="password"
+            value={acccEdit.pass}
+            type="text"
             name="pass"
             placeholder="Пароль"
           />

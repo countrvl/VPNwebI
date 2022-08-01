@@ -10,8 +10,8 @@ const lkRouter = Router();
 lkRouter.route('/allusers')
   .get(checkAuth, usersController.getAllUsers);// админ
 
-lkRouter.route('allusers/:id')
-  .get(checkAuth, usersController.adminEditUser);
+lkRouter.route('/allusers/:id')
+  .patch(checkAuth, usersController.adminEditUser);
 
 lkRouter.route('/user/:id')
   .patch(checkAuth, checkAuthor, usersController.editUser)

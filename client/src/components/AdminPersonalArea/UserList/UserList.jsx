@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
@@ -6,10 +6,11 @@ import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction
 import * as endPoints from '../../../config/endPoints';
 
 import Loader from '../../Loader/Loader';
+import { deleteAllUserThunk, getAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
 
 function UserList() {
   const currentUser = useSelector((store) => store.user);
-  const [list, setList] = useState([]);
+  const list = useSelector((store) => store.allUsers);
 
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.loader);
@@ -17,14 +18,13 @@ function UserList() {
 
   useEffect(() => {
     dispatch(enableLoader());
-    fetch(endPoints.getAllUsers(), { credentials: 'include' })
-      .then((response) => response.json())
-      .then((users) => setList(users))
-      .catch((e) => console.error('>>>>>>>>>', e))
-      .finally(() => {
-        dispatch(disableLoader());
-      });
+    dispatch(getAllUserThunk());
+    dispatch(disableLoader());
   }, []);
+
+  const deleteHandler = (id) => {
+    dispatch(deleteAllUserThunk(id));
+  };
 
   if (loader && currentUser) return <Loader />;
 
@@ -57,7 +57,7 @@ function UserList() {
               <>
                 <Link to={`/personalarea/user/${user.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
                 <Link to={`/personalarea/admaccs/${user.id}`}><button className="btn btn-primary ms-2" type="button">аккаунты</button></Link>
-                <button className="btn btn-danger ms-2" type="button">удалить</button>
+                <button onClick={() => deleteHandler(user.id)} className="btn btn-danger ms-2" type="button">удалить</button>
               </>
             )}
           </div>

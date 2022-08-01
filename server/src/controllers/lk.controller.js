@@ -49,7 +49,7 @@ const editAcc = async (req, res) => {
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await Account.update(updatedFields, {
-        where: { id: req.params },
+        where: { id: req.params.id },
         returning: true,
         plain: true,
         raw: true,
@@ -134,15 +134,20 @@ const adminEditUser = async (req, res) => {
   console.log('CHANGED REQ BODY >>>>', req.body);
   if (updatedFields.length) {
     updatedFields = Object.fromEntries(updatedFields);
+
+    console.log(updatedFields);
+
     const pass = updatedFields.password;
+
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await User.update(updatedFields, {
-        where: { id: req.params },
+        where: { id: req.params.id },
         returning: true,
         plain: true,
         raw: true,
       });
+      console.log(updatedUser);
       return res.json(updatedUser);
     } catch (error) {
       return res.sendStatus(500);
