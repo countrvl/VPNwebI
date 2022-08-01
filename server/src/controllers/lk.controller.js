@@ -70,6 +70,18 @@ const getAllAcc = async (req, res) => {
   }
 };
 
+/// -------- вывод одного аккаунта -------///
+
+const getAccOne = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const currentAcc = await Account.findByPk(id);
+    res.json(currentAcc);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
+
 /// ------- создание аккаунта ------///
 
 const createAcc = async (req, res) => {
@@ -167,4 +179,5 @@ module.exports = {
   deleteUser, //
   getAllAccAdm, //
   adminEditUser, //
+  getAccOne, //
 };
