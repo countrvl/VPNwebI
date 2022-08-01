@@ -1,25 +1,20 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
 import * as endPoints from '../../../config/endPoints';
 
-function AdminListAcc() {
-  const { id } = useParams();
-
-  const [list, setList] = useState([]);
+function UserAccs() {
+  const [list, setList] = useState();
 
   useEffect(() => {
-    fetch(endPoints.getAllAccAdm(id), { credentials: 'include' })
+    fetch(endPoints.getUserAllAcc(), { credentials: 'include' })
       .then((response) => response.json())
-      .then((data) => setList(data))
-      .catch((error) => console.error(error));
+      .then((data) => setList(data));
   }, []);
 
-  if (list.length === 0) return <p>ПУСТО</p>;
+  console.log(list);
   return (
     <div className="d-flex justify-content-center">
       <div className="list-group">
-        {list.map((acc) => (
+        {list?.map((acc) => (
           <div className="list-group-item mt-1" key={acc.id}>
             Логин:
             {' '}
@@ -28,7 +23,7 @@ function AdminListAcc() {
             , Пароль:
             {' '}
             <strong>**********</strong>
-            <Link to={`/personalarea/admacc/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
+            <button className="btn btn-primary ms-2" type="button">изменить</button>
             <button className="btn btn-danger ms-2" type="button">удалить</button>
           </div>
         ))}
@@ -37,4 +32,4 @@ function AdminListAcc() {
   );
 }
 
-export default AdminListAcc;
+export default UserAccs;
