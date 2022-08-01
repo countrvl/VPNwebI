@@ -1,9 +1,13 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteAllAccsThunk, getAllAccsThunk } from '../../redux/actions/allAccsActions&Thunks/allAccsThunks';
+
+import * as endPoints from '../../config/endPoints';
+
 
 function UserAccs() {
   const list = useSelector((store) => store.allAccs);
@@ -43,8 +47,12 @@ function UserAccs() {
               , Пароль:
               {' '}
               <strong>**********</strong>
+
               <Link to={`/admacc/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
               <button onClick={() => deleteHandler(acc.id)} className="btn btn-danger ms-2" type="button">удалить</button>
+
+           //   <button className="btn btn-danger ms-2" type="button">удалить</button>
+
             </div>
           ))}
         </div>

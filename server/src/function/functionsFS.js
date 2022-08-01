@@ -13,16 +13,16 @@ const adminReadFile = async () => {
 // adminReadFile();
 
 // update file for admin
-const userName = 'testname7';
-const userPassword = 'testpass7';
+// const userName = 'testname7';
+// const userPassword = 'testpass7';
 
-const user = 'pupkin';
-const myPassword = 'password';
+// const user = 'pupkin';
+// const myPassword = 'password';
 
 const adminUpdateFile = async (name, password) => {
   await fs.appendFile(path, `"${name}" l2tpd "${password}" *\n`);
-  console.log('appdate is ok. Your file:');
-  console.log(adminReadFile());
+  // console.log('appdate is ok. Your file:');
+  // console.log(adminReadFile());
 };
 
 // adminUpdateFile(user, myPassword);
@@ -32,7 +32,7 @@ const adminDeleteOneLine = async (name) => {
   const data = await fs.readFile(path, 'utf8');
   const arr = data.split('\n').filter((el) => !el.includes(name)).join('\n');
   await fs.writeFile('../../db/etc/ppp/chap-secrets', arr);
-  console.log(adminReadFile());
+  // console.log(adminReadFile());
   return console.log(arr);
 };
 
@@ -47,3 +47,7 @@ const adminChangeUserData = async (name, newName, newPassword) => {
 };
 
 // adminChangeUserData(user, userName, userPassword);
+
+module.exports = {
+  adminUpdateFile, adminDeleteOneLine, adminChangeUserData,
+};
