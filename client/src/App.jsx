@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
 import PrivateRoute from './components/PrivateRouter/PrivateRouter';
@@ -14,8 +14,12 @@ import AdminPersonalArearea from './components/AdminPersonalArea/AdminPersonalAr
 import AdminUserEdit from './components/AdminPersonalArea/AdminEditUser/AdminUserEdit';
 import { checkAuth } from './redux/actions/userAction';
 import AdminListAcc from './components/AdminPersonalArea/AdminListAcc/AdminListAcc';
+import AdminAccsEdit from './components/AdminPersonalArea/AdminAccsEdit/AdminAccsEdit';
+import UserPersonalArea from './components/UserPersonalArea/UserPersonalArea';
 
 function App() {
+  const adminStatus = useSelector((store) => store.user?.adm);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,10 +40,16 @@ function App() {
       <div className="container py-5">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/personalarea" element={<PrivateRoute><AdminPersonalArearea /></PrivateRoute>} />
+          {adminStatus ? (
+            <Route path="personalarea">
+              <Route index element={<PrivateRoute><AdminPersonalArearea /></PrivateRoute>} />
+              <Route path="user/:id" element={<PrivateRoute><AdminUserEdit /></PrivateRoute>} />
+              <Route path="admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} />
+              <Route path="admacc/:id" element={<PrivateRoute><AdminAccsEdit /></PrivateRoute>} />
+            </Route>
+          ) : <Route path="/personalarea" element={<PrivateRoute><UserPersonalArea /></PrivateRoute>} />}
+
           <Route path="/myuser" element={<PrivateRoute><UserEdit /></PrivateRoute>} />
-          <Route path="/user/:id" element={<PrivateRoute><AdminUserEdit /></PrivateRoute>} />
-          <Route path="/admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} />
           <Route path="/auth/signout" element={<PrivateRoute><SignOut /></PrivateRoute>} />
           <Route path="/auth/signup" element={<SignUp />} />
           <Route path="/auth/signin" element={<SignIn />} />

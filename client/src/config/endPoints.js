@@ -10,3 +10,4 @@ export const editUser = (id) => `${host}/lk/user/${id}`;
 export const getUser = (id) => `${host}/lk/user/${id}`;
 
 export const getAllAccAdm = (id) => `${host}/lk/allaccs/${id}`;
+export const getUserAllAcc = () => `${host}/lk/myaccs`;
