@@ -30,7 +30,7 @@ function UserList() {
     console.log(user.email, currentUser)
   ));
 
-  if (list.length === 0) return <p>Not users</p>;
+  if (list.length === 0) return <p className="text">Not users</p>;
 
   return (
 
