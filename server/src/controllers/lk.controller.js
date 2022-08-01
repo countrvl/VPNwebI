@@ -45,7 +45,7 @@ const editAcc = async (req, res) => {
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await Account.update(updatedFields, {
-        where: { user_id: req.session.user.id },
+        where: { id: req.params },
         returning: true,
         plain: true,
         raw: true,
@@ -61,9 +61,9 @@ const editAcc = async (req, res) => {
 /// -------- все аккаунты одного пользователя -------///
 
 const getAllAcc = async (req, res) => {
-  const { userId } = req.session.user.id;
+  const { id } = req.session.user;
   try {
-    const allAccounts = await User.findAll({ where: { user_id: userId } }, { include: 'Accounts' });
+    const allAccounts = await User.findAll({ where: { user_id: id } }, { include: 'Accounts' });
     return res.json(allAccounts);
   } catch (error) {
     return res.sendStatus(500);
@@ -73,11 +73,11 @@ const getAllAcc = async (req, res) => {
 /// ------- создание аккаунта ------///
 
 const createAcc = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   try {
     const { acname, pass } = await req.body;
     const newAcc = await Account.create({
-      ac_name: acname, pass, user_id: userId, status: true,
+      ac_name: acname, pass, user_id: id, status: true,
     });
     return res.json({ newAcc });
   } catch (error) {
@@ -184,7 +184,7 @@ module.exports = {
   getUser, //
   getAllUsers, //
   getAllAcc, //
-  createAcc, //l
+  createAcc, //
   deleteAcc, //
   deleteUser, //
   getAllAccAdm, //
