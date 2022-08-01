@@ -45,7 +45,7 @@ const editAcc = async (req, res) => {
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await Account.update(updatedFields, {
-        where: { id: req.session.user.id },
+        where: { user_id: req.session.user.id },
         returning: true,
         plain: true,
         raw: true,
@@ -63,7 +63,7 @@ const editAcc = async (req, res) => {
 const getAllAcc = async (req, res) => {
   const { userId } = req.session.user.id;
   try {
-    const allAccounts = await User.findAll({ where: { id: userId } }, { include: 'Accounts' });
+    const allAccounts = await User.findAll({ where: { user_id: userId } }, { include: 'Accounts' });
     return res.json(allAccounts);
   } catch (error) {
     return res.sendStatus(500);
