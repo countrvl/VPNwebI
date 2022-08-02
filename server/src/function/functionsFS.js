@@ -11,7 +11,6 @@ const adminReadFile = async () => {
 
 const adminUpdateFile = async (name, password) => {
   await fs.appendFile(path, `"${name}" l2tpd "${password}" *\n`);
-
 };
 
 // delete one line
@@ -19,8 +18,6 @@ const adminDeleteOneLine = async (name) => {
   const data = await fs.readFile(path, 'utf8');
   const arr = data.split('\n').filter((el) => !el.includes(name)).join('\n');
   await fs.writeFile('../../db/etc/ppp/chap-secrets', arr);
-
-
 };
 
 // change users name and password
@@ -29,7 +26,6 @@ const adminChangeUserData = async (name, newName, newPassword) => {
   const arr = data.split('\n').map((el) => (el.includes(name) ? `"${newName}" l2tpd "${newPassword}" *` : el)).join('\n');
   await fs.writeFile(path, arr);
 };
-
 
 module.exports = {
   adminReadFile,
