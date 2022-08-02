@@ -1,6 +1,6 @@
 const sha256 = require('sha256');
 const { Account, User } = require('../../db/models');
-const { adminDeleteOneLine } = require('../function/functionsFS');
+const { adminDeleteOneLine, adminUpdateFile, adminChangeUserData } = require('../function/functionsFS');
 
 /// -------- изменение своего пользователя -------///
 
@@ -55,11 +55,14 @@ const editAcc = async (req, res) => {
     if (updatedFields.pass) {
       updatedFields = {
         ...updatedFields,
-        pass: sha256(updatedFields.pass),
+        pass: updatedFields.pass,
       };
     }
     try {
       // eslint-disable-next-line max-len
+      const acc = await Account.findByPk(req.params.id);
+      adminChangeUserData(acc.ac_name, updatedFields.ac_name, updatedFields.pass);
+
       const [, updatedUser] = await Account.update(updatedFields, {
         where: { id: req.params.id },
         returning: true,
@@ -107,6 +110,7 @@ const createAcc = async (req, res) => {
     const newAcc = await Account.create({
       ac_name: acname, pass, user_id: id, status: true,
     });
+    adminUpdateFile(acname, pass);
     return res.json(newAcc);
   } catch (error) {
     return res.sendStatus(500);
@@ -118,6 +122,8 @@ const createAcc = async (req, res) => {
 const deleteAcc = async (req, res) => {
   const { id } = req.params;
   try {
+    const acc = await Account.findByPk(id);
+    adminDeleteOneLine(acc.ac_name);
     await Account.destroy({ where: { id } });
     return res.sendStatus(200);
   } catch (error) {

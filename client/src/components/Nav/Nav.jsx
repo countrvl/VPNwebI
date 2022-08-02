@@ -43,8 +43,8 @@ function Nav({ switchTheme, theme }) {
             </ul>
           </div>
 
-          <div className="them">
-            <button type="button" onClick={switchTheme} className="fa-brands fa-telegram">button</button>
+          <div className="theme">
+            <button type="button" onClick={switchTheme} className="switchTheme">тема</button>
           </div>
         </div>
       </div>

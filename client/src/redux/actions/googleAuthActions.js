@@ -6,6 +6,7 @@ export const getGoogleDataThunk = (data) => async (dispatch) => {
     headers: {
       'Content-type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify({ data }),
   });
   const userGoogle = await response.json();

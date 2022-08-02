@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-const path = '../../db/etc/ppp/chap-secrets';
+const path = '/home/stanislav/Рабочий стол/Elbrus bootcamp - Tiger 2022/phase 3/week 3/VPNwebI/server/db/etc/ppp/chap-secrets';
 
 // read file for admin
 const adminReadFile = async () => {
@@ -8,19 +8,15 @@ const adminReadFile = async () => {
 };
 
 // update file for admin
-
 const adminUpdateFile = async (name, password) => {
   await fs.appendFile(path, `"${name}" l2tpd "${password}" *\n`);
-
 };
 
 // delete one line
 const adminDeleteOneLine = async (name) => {
   const data = await fs.readFile(path, 'utf8');
   const arr = data.split('\n').filter((el) => !el.includes(name)).join('\n');
-  await fs.writeFile('../../db/etc/ppp/chap-secrets', arr);
-
-
+  await fs.writeFile(path, arr);
 };
 
 // change users name and password
@@ -30,11 +26,9 @@ const adminChangeUserData = async (name, newName, newPassword) => {
   await fs.writeFile(path, arr);
 };
 
-
 module.exports = {
   adminReadFile,
   adminUpdateFile,
   adminDeleteOneLine,
   adminChangeUserData,
-
 };

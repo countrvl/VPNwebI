@@ -41,7 +41,7 @@ function UserAccs() {
 
   return (
     <div className="d-flex flex-column">
-      <div className="card">
+      <div className="createAcc card">
         <form onSubmit={submitHandler} className="p-1 d-flex flex-column">
           <input type="text" onChange={changeHandler} name="acname" value={input.acname} placeholder="Логин" className="from-control" />
           <input type="password" onChange={changeHandler} name="pass" value={input.pass} placeholder="Пароль" className="from-control mt-1" />
@@ -52,7 +52,7 @@ function UserAccs() {
         <label htmlFor="listAccs" className="text-danger fs-4">Мои аккаунты:</label>
         <div className="list-group" id="listAccs">
           {list?.map((acc) => (
-            <div className="list-group-item mt-1" key={acc.id}>
+            <div className="myAccText list-group-item mt-1" key={acc.id}>
               Логин:
               {' '}
               <strong>{acc.ac_name}</strong>
@@ -60,10 +60,8 @@ function UserAccs() {
               , Пароль:
               {' '}
               <strong>**********</strong>
-
               <Link to={`/accs/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
               <button onClick={() => deleteHandler(acc.id)} className="btn btn-danger ms-2" type="button">удалить</button>
-
             </div>
           )).reverse()}
         </div>
