@@ -9,6 +9,7 @@ module.exports = {
       },
       userName: {
         type: Sequelize.STRING,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -18,9 +19,11 @@ module.exports = {
       },
       adm: {
         type: Sequelize.BOOLEAN,
+        default: false,
       },
       status: {
         type: Sequelize.BOOLEAN,
+        default: true,
       },
       createdAt: {
         allowNull: false,

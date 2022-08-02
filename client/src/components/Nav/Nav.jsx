@@ -1,67 +1,50 @@
 import React, { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
-function Nav() {
+// eslint-disable-next-line react/prop-types
+function Nav({ switchTheme, theme }) {
   const user = useSelector((state) => state.user);
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-light">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
       <div className="container">
-        <div className="container-fluid d-flex">
-          <Link className="navbar-brand" to="/">
-            Auth App
+        <div className="container-fluid d-flex justify-content-between">
+          <Link className={`navbar-brand-${theme}`} to="/">
+            VPN Morda
           </Link>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className=" navbar-collapse ms-10" id="navbarNav">
             <ul className="navbar-nav">
               {user ? (
                 <>
                   <li className="nav-item">
                     <NavLink
                       to="/auth/signout"
-                      className="nav-link"
+                      className={`nav-link-${theme}`}
                     >
-                      Sign out
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
-                      to="/user/edit"
-                      className="nav-link"
-                    >
-                      Edit
+                      Выход
                     </NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink
-                      to="/users"
-                      className="nav-link"
+                      to="/personalarea"
+                      className={`nav-link-${theme}`}
                     >
-                      Users
+                      Личный кабинет
                     </NavLink>
                   </li>
                 </>
               ) : (
-                <>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/auth/signup"
-                      className="nav-link"
-                    >
-                      Sign Up
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/auth/signin"
-                      className="nav-link"
-                    >
-                      Sign In
-                    </NavLink>
-                  </li>
-                </>
+                <li className="nav-item">
+                  <NavLink to="/" className={`nav-link-${theme}`}>
+                    Документация
+                  </NavLink>
+                </li>
               )}
             </ul>
+          </div>
+
+          <div className="them">
+            <button type="button" onClick={switchTheme} className="fa-brands fa-telegram">button</button>
           </div>
         </div>
       </div>

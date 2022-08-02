@@ -1,10 +1,12 @@
+const sha256 = require('sha256');
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
       'Users',
       [{
         userName: 'Nikol',
-        password: '123',
+        password: sha256('123'),
         email: 'nikolrus03@gmail.com',
         adm: true,
         status: false,
@@ -13,7 +15,7 @@ module.exports = {
       },
       {
         userName: 'Morda',
-        password: '1234',
+        password: sha256('1234'),
         email: 'morda@gmail.com',
         adm: false,
         status: false,
