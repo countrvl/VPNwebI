@@ -83,12 +83,12 @@ code {
 }
 
 .nav-link-light {
-  color: var(--text-rimary);
+  color: var(--text-primary);
   padding-left: 13px;
 }
 
 .theme {
-  font-size: 2rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -110,11 +110,6 @@ code {
   width: 100%;
   justify-content: center;
 }
-
-/* i {
-  font-size:2rem;
-  color: var(--text-primary);
-} */
 
 .userAcc {
   padding: 8px;
@@ -171,6 +166,10 @@ code {
   color: var(--text-primary);
 }
 
-.google {
-  padding-left: 80px;
+.switchTheme {
+  width: 55px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
 }
