@@ -1,0 +1,1 @@
+export const SET_CHECK_BLOCK = 'SET_CHECK_BLOCK';

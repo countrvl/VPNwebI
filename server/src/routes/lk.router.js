@@ -17,6 +17,7 @@ lkRouter.route('/user/:id')
   .patch(checkAuth, checkAuthor, usersController.editUser)
   .get(checkAuth, usersController.getUser)
   .delete(checkAuth, usersController.deleteUser);
+lkRouter.patch('/blockuser/:id', checkAuth, usersController.blockUser); /// не уверена насчет patch (всё верно, патч)
 
 /// / ---- аккаунты ---///
 
@@ -26,6 +27,5 @@ lkRouter.delete('/accs/:id', checkAuth, usersController.deleteAcc);
 lkRouter.patch('/accs/:id', checkAuth, usersController.editAcc);
 lkRouter.get('/allaccs/:id', checkAuth, usersController.getAllAccAdm);
 lkRouter.get('/oneacc/:id', checkAuth, usersController.getAccOne);
-lkRouter.patch('/blockuser/:id', checkAuth, usersController.blockUser); /// не уверена насчет patch
 
 module.exports = lkRouter;

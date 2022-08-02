@@ -110,7 +110,7 @@ const createAcc = async (req, res) => {
     const newAcc = await Account.create({
       ac_name: acname, pass, user_id: id, status: true,
     });
-    adminUpdateFile(acname, pass);
+    adminUpdateFile([{ ac_name: newAcc.ac_name, pass: newAcc.pass }]);
     return res.json(newAcc);
   } catch (error) {
     return res.sendStatus(500);
@@ -123,7 +123,7 @@ const deleteAcc = async (req, res) => {
   const { id } = req.params;
   try {
     const acc = await Account.findByPk(id);
-    adminDeleteOneLine(acc.ac_name);
+    adminDeleteOneLine([{ ac_name: acc.ac_name }]);
     await Account.destroy({ where: { id } });
     return res.sendStatus(200);
   } catch (error) {
@@ -158,6 +158,7 @@ const adminEditUser = async (req, res) => {
     }
     try {
       // eslint-disable-next-line max-len
+      console.log(updatedFields);
       const [, updatedUser] = await User.update(updatedFields, {
         where: { id: req.params.id },
         returning: true,
@@ -201,12 +202,27 @@ const getAllAccAdm = async (req, res) => {
 /// --------------блокировка юзера и всех его аккаунтов ------///
 
 const blockUser = async (req, res) => {
-  const { id } = req.params;
+  const { status } = req.body;
   try {
-    const curUser = await User.findByPk(id);
-    const name = curUser.dataValues.userName;
-    adminDeleteOneLine(name);
-    return res.sendStatus(200);
+    const accs = await Account.findAll({ where: { user_id: req.params.id }, raw: true });
+    if (status) {
+      await User.update(req.body, {
+        where: { id: req.params.id },
+        returning: true,
+        plain: true,
+        raw: true,
+      });
+      adminUpdateFile(accs);
+      return res.json(req.body);
+    }
+    await User.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+      plain: true,
+      raw: true,
+    });
+    adminDeleteOneLine(accs);
+    return res.json(req.body);
   } catch (error) {
     return res.sendStatus(400);
   }
