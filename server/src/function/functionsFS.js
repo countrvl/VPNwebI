@@ -17,7 +17,7 @@ const adminDeleteOneLine = async (name) => {
   const data = await fs.readFile(path, 'utf8');
   const arr = data.split('\n').filter((el) => !el.includes(name)).join('\n');
   await fs.writeFile(path, arr);
-};
+
 
 // change users name and password
 const adminChangeUserData = async (name, newName, newPassword) => {

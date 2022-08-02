@@ -10,7 +10,7 @@ function UserPersonalArea() {
   return (
     <div className="d-flex flex-column align-items-center">
       <label htmlFor="myCard" className="text-danger fs-4">Моя учетная запись:</label>
-      <div className="card mb-3" id="myCard" style={{ width: '18rem' }}>
+      <div className="userAcc card mb-3" id="myCard" style={{ width: '18rem' }}>
         <div className="card-body d-flex flex-column align-items-center">
           <h5 className="card-title">{user.userName}</h5>
           <div className="card-text">
