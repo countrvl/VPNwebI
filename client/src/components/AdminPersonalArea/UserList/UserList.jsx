@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction';
-import * as endPoints from '../../../config/endPoints';
 
 import Loader from '../../Loader/Loader';
 import { deleteAllUserThunk, getAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
@@ -61,7 +60,7 @@ function UserList() {
               </>
             )}
           </div>
-        ))}
+        )).reverse()}
       </div>
     </div>
   );

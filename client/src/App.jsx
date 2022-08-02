@@ -41,14 +41,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           {adminStatus ? (
-            <Route path="personalarea">
+            <Route path="/personalarea">
               <Route index element={<PrivateRoute><AdminPersonalArearea /></PrivateRoute>} />
               <Route path="user/:id" element={<PrivateRoute><AdminUserEdit /></PrivateRoute>} />
               <Route path="/admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} />
             </Route>
           ) : <Route path="/personalarea" element={<PrivateRoute><UserPersonalArea /></PrivateRoute>} />}
 
-          <Route path="/admacc/:id" element={<PrivateRoute><AccsEdit /></PrivateRoute>} />
+          <Route path="/accs/:id" element={<PrivateRoute><AccsEdit /></PrivateRoute>} />
           <Route path="/myuser" element={<PrivateRoute><UserEdit /></PrivateRoute>} />
           <Route path="/auth/signout" element={<PrivateRoute><SignOut /></PrivateRoute>} />
           <Route path="/auth/signup" element={<SignUp />} />
