@@ -18,6 +18,7 @@ app.set('cookieName', COOKIE_NAME);
 app.use(
   cors({
     origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   }),
 );
