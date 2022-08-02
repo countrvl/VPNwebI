@@ -139,6 +139,7 @@ const googleUser = async (req, res) => {
     console.error(error);
     return res.sendStatus(500);
   }
+  return res.sendStatus(200);
 };
 
 module.exports = {

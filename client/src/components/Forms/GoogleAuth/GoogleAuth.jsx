@@ -7,7 +7,6 @@ export default function GoogleAuth() {
   const dispatch = useDispatch();
 
   function handleCallbackResponse(response) {
-    // const userObject = jwt_decode(response.credential);
     dispatch(getGoogleDataThunk(response));
   }
 
@@ -25,7 +24,7 @@ export default function GoogleAuth() {
 
   return (
     <div>
-      <i id="signInDiv" className="fab fa-google" />
+      <i id="signInDiv" className="google" />
     </div>
 
   );
