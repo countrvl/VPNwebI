@@ -28,7 +28,6 @@ function UserEdit() {
         ...prev,
         email: userData.email,
         userName: userData.userName,
-        password: userData.password,
         status: userData.status,
       })))
       .finally(() => {
@@ -55,7 +54,7 @@ function UserEdit() {
     <div className="d-flex justify-content-center">
       <form
         onSubmit={submitHandler}
-        className="d-flex flex-column align-items-center bg-light text-dark p-3 border rounded-3"
+        className="userEdit d-flex flex-column align-items-center"
       >
         <legend className="text text-center mb-4">User Edit</legend>
         <div className="mb-3">

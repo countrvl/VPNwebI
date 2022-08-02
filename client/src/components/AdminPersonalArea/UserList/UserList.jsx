@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction';
-import * as endPoints from '../../../config/endPoints';
 
 import Loader from '../../Loader/Loader';
 import { deleteAllUserThunk, getAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
 
 function UserList() {
   const currentUser = useSelector((store) => store.user);
-  const list = useSelector((store) => store.allUsers);
+  let list = useSelector((store) => store.allUsers);
 
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.loader);
@@ -29,6 +28,8 @@ function UserList() {
   if (loader && currentUser) return <Loader />;
 
   if (list.length === 0) return <p className="text">Not users</p>;
+
+  list = list.filter((obj) => obj.id !== userId);
 
   return (
 
@@ -61,7 +62,7 @@ function UserList() {
               </>
             )}
           </div>
-        ))}
+        )).reverse()}
       </div>
     </div>
   );

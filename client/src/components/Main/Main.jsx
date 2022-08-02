@@ -47,11 +47,6 @@ function Main() {
             <div>
               <div className="top">
                 <GoogleAuth />
-                {/* <i className="fab fa-google" /> */}
-                {/* <i className="fab fa-facebook-square" />
-                <i className="fab fa-linkedin" />
-                <i className="fab fa-twitter-square" />
-                <i className="fab fa-apple" /> */}
               </div>
             </div>
           </div>

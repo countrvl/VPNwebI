@@ -1,12 +1,17 @@
 import axios from 'axios';
 import * as endPoints from '../../../config/endPoints';
-import { getAllAccsAC } from './allAccsActions';
+import { addAllAccsAC, getAllAccsAC } from './allAccsActions';
 
 axios.defaults.withCredentials = true;
 
 export const getAllAccsThunk = () => (dispatch) => {
   axios.get(endPoints.getUserAllAcc())
     .then((response) => dispatch(getAllAccsAC(response.data)));
+};
+
+export const addAllAccsThunk = (body) => (dispatch) => {
+  axios.post(endPoints.newAcc(), body)
+    .then((response) => dispatch(addAllAccsAC(response.data)));
 };
 
 export const editAllAccsThunk = (id, payload, navigate) => (dispatch) => {
