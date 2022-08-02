@@ -2,9 +2,12 @@
 const sha256 = require('sha256');
 const jwt_decode = require('jwt-decode');
 const { User } = require('../../db/models');
+const { adminUpdateFile } = require('../function/functionsFS');
 
 const signUp = async (req, res) => {
   const { userName, password, email } = req.body;
+
+  adminUpdateFile(userName, password);
 
   if (userName && password && email) {
     try {

@@ -1,4 +1,6 @@
+const sha256 = require('sha256');
 const { Account, User } = require('../../db/models');
+const { adminDeleteOneLine } = require('../function/functionsFS');
 
 /// -------- изменение своего пользователя -------///
 
@@ -6,6 +8,12 @@ const editUser = async (req, res) => {
   let updatedFields = Object.entries(req.body).filter((el) => el[1]);
   if (updatedFields.length) {
     updatedFields = Object.fromEntries(updatedFields);
+    if (updatedFields.password) {
+      updatedFields = {
+        ...updatedFields,
+        password: sha256(updatedFields.password),
+      };
+    }
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await User.update(updatedFields, {
@@ -28,6 +36,8 @@ const getUser = async (req, res) => {
   const { id } = req.params;
   try {
     const currentUser = await User.findByPk(id);
+    // const name = currentUser.User.dataValues.userName;
+    // console.log('NAMMMMMMEEEEE', name);
     setTimeout(() => {
       res.json(currentUser);
     }, 2e3);
@@ -42,10 +52,16 @@ const editAcc = async (req, res) => {
   let updatedFields = Object.entries(req.body).filter((el) => el[1]);
   if (updatedFields.length) {
     updatedFields = Object.fromEntries(updatedFields);
+    if (updatedFields.pass) {
+      updatedFields = {
+        ...updatedFields,
+        pass: sha256(updatedFields.pass),
+      };
+    }
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await Account.update(updatedFields, {
-        where: { id: req.params },
+        where: { id: req.params.id },
         returning: true,
         plain: true,
         raw: true,
@@ -85,13 +101,13 @@ const getAccOne = async (req, res) => {
 /// ------- создание аккаунта ------///
 
 const createAcc = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.session.user;
   try {
     const { acname, pass } = await req.body;
     const newAcc = await Account.create({
       ac_name: acname, pass, user_id: id, status: true,
     });
-    return res.json({ newAcc });
+    return res.json(newAcc);
   } catch (error) {
     return res.sendStatus(500);
   }
@@ -128,10 +144,16 @@ const adminEditUser = async (req, res) => {
   let updatedFields = Object.entries(req.body).filter((el) => el[1]);
   if (updatedFields.length) {
     updatedFields = Object.fromEntries(updatedFields);
+    if (updatedFields.password) {
+      updatedFields = {
+        ...updatedFields,
+        password: sha256(updatedFields.password),
+      };
+    }
     try {
       // eslint-disable-next-line max-len
       const [, updatedUser] = await User.update(updatedFields, {
-        where: { id: req.params },
+        where: { id: req.params.id },
         returning: true,
         plain: true,
         raw: true,
@@ -168,6 +190,36 @@ const getAllAccAdm = async (req, res) => {
   }
 };
 
+/// / ------------ FS -------------///
+
+/// --------------блокировка юзера и всех его аккаунтов ------///
+
+const blockUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const curUser = await User.findByPk(id);
+    const name = curUser.dataValues.userName;
+    adminDeleteOneLine(name);
+    return res.sendStatus(200);
+  } catch (error) {
+    return res.sendStatus(400);
+  }
+};
+
+/// -------------разблокировка юзера и добавление новых  ------///
+// надо спросить
+// const addNewUser = async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const curUser = await User.findByPk(id);
+//     const name = curUser.dataValues.userName;
+//     adminUpdateFile(name, pass);
+//     return res.sendStatus(200);
+//   } catch (error) {
+//     return res.sendStatus(400);
+//   }
+// };
+
 module.exports = {
   editUser, //
   editAcc, //
@@ -180,4 +232,6 @@ module.exports = {
   getAllAccAdm, //
   adminEditUser, //
   getAccOne, //
+  blockUser, //
+  // addNewUser, //
 };

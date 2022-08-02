@@ -16,5 +16,17 @@ module.exports = {
     semi: ['error', 'always'],
     'no-console': 0,
     'no-underscore-dangle': 0,
+    indent: [
+      'error',
+      2,
+      {
+        ignoredNodes: [
+          'TemplateLiteral',
+        ],
+      },
+    ],
+    'template-curly-spacing': [
+      'off',
+    ],
   },
 };

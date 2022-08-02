@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction';
 import Loader from '../../Loader/Loader';
 import * as endPoints from '../../../config/endPoints';
+import { editAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
 
 function AdminUserEdit() {
   const { id } = useParams();
@@ -20,7 +21,7 @@ function AdminUserEdit() {
   });
 
   const loader = useSelector((state) => state.loader);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,7 +50,7 @@ function AdminUserEdit() {
     let payload = Object.entries(userEdit);
     if (payload.length) {
       payload = Object.fromEntries(payload);
-      // dispatch(editUser(payload, navigate));
+      dispatch(editAllUserThunk(id, payload, navigate));
     }
   };
 
