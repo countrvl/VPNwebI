@@ -28,7 +28,6 @@ function UserEdit() {
         ...prev,
         email: userData.email,
         userName: userData.userName,
-        password: userData.password,
         status: userData.status,
       })))
       .finally(() => {
