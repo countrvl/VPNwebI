@@ -1,7 +1,8 @@
-const fs = require('fs').promises;
 require('dotenv').config();
+const fs = require('fs').promises;
 
-const path = procces.env.PATH_PPP;
+// const { PATH_PPP} = process.env;
+const path = process.env.PATH_PPP;
 
 // read file for admin
 const adminReadFile = async () => {
