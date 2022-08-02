@@ -100,7 +100,7 @@ export const editUser = (user, navigate) => async (dispatch, getState) => {
     dispatch(setUser(userData));
     navigate('/personalarea');
   } else {
-    navigate.replace('/');
+    navigate('/');
   }
   dispatch(disableLoader());
 };

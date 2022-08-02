@@ -44,7 +44,7 @@ function App() {
             <Route path="/personalarea">
               <Route index element={<PrivateRoute><AdminPersonalArearea /></PrivateRoute>} />
               <Route path="user/:id" element={<PrivateRoute><AdminUserEdit /></PrivateRoute>} />
-              <Route path="/admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} />
+              <Route path="admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} />
             </Route>
           ) : <Route path="/personalarea" element={<PrivateRoute><UserPersonalArea /></PrivateRoute>} />}
 
