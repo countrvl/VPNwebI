@@ -40,7 +40,7 @@ function AdminListAcc() {
             <Link to={`/admacc/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
             <button onClick={() => deleteHandler(acc.id)} className="btn btn-danger ms-2" type="button">удалить</button>
           </div>
-        ))}
+        )).reverse()}
       </div>
     </div>
   );

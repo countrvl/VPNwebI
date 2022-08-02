@@ -1,5 +1,5 @@
 const { Account, User } = require('../../db/models');
-const { adminUpdateFile, adminDeleteOneLine, adminChangeUserData } = require('../function/functionsFS');
+const { adminDeleteOneLine } = require('../function/functionsFS');
 
 /// -------- изменение своего пользователя -------///
 
@@ -89,13 +89,13 @@ const getAccOne = async (req, res) => {
 /// ------- создание аккаунта ------///
 
 const createAcc = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.session.user;
   try {
     const { acname, pass } = await req.body;
     const newAcc = await Account.create({
       ac_name: acname, pass, user_id: id, status: true,
     });
-    return res.json({ newAcc });
+    return res.json(newAcc);
   } catch (error) {
     return res.sendStatus(500);
   }
@@ -136,8 +136,6 @@ const adminEditUser = async (req, res) => {
     updatedFields = Object.fromEntries(updatedFields);
 
     console.log(updatedFields);
-
-    const pass = updatedFields.password;
 
     try {
       // eslint-disable-next-line max-len
