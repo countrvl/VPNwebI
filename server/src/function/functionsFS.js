@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-const path = '/Users/artemkulikov/Desktop/VPNwebI/server/db/etc/ppp/chap-secrets.txt';
+const path = '/home/stanislav/Рабочий стол/Elbrus bootcamp - Tiger 2022/phase 3/week 3/VPNwebI/server/db/etc/ppp/chap-secrets';
 
 // read file for admin
 const adminReadFile = async () => {
@@ -31,5 +31,4 @@ module.exports = {
   adminUpdateFile,
   adminDeleteOneLine,
   adminChangeUserData,
-
 };
