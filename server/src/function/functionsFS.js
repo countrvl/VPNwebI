@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-const path = '../../db/etc/ppp/chap-secrets';
+const path = '/Users/artemkulikov/Desktop/VPNwebI/server/db/etc/ppp/chap-secrets.txt';
 
 // read file for admin
 const adminReadFile = async () => {
@@ -8,7 +8,6 @@ const adminReadFile = async () => {
 };
 
 // update file for admin
-
 const adminUpdateFile = async (name, password) => {
   await fs.appendFile(path, `"${name}" l2tpd "${password}" *\n`);
 };
@@ -17,8 +16,8 @@ const adminUpdateFile = async (name, password) => {
 const adminDeleteOneLine = async (name) => {
   const data = await fs.readFile(path, 'utf8');
   const arr = data.split('\n').filter((el) => !el.includes(name)).join('\n');
-  await fs.writeFile('../../db/etc/ppp/chap-secrets', arr);
-};
+  await fs.writeFile(path, arr);
+
 
 // change users name and password
 const adminChangeUserData = async (name, newName, newPassword) => {

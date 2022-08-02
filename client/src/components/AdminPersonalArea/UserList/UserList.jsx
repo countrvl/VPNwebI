@@ -9,7 +9,7 @@ import { deleteAllUserThunk, getAllUserThunk } from '../../../redux/actions/allU
 
 function UserList() {
   const currentUser = useSelector((store) => store.user);
-  const list = useSelector((store) => store.allUsers);
+  let list = useSelector((store) => store.allUsers);
 
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.loader);
@@ -28,6 +28,8 @@ function UserList() {
   if (loader && currentUser) return <Loader />;
 
   if (list.length === 0) return <p className="text">Not users</p>;
+
+  list = list.filter((obj) => obj.id !== userId);
 
   return (
 
