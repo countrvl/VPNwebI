@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
+require('dotenv').config();
 
-const path = '/home/stanislav/Рабочий стол/Elbrus bootcamp - Tiger 2022/phase 3/week 3/VPNwebI/server/db/etc/ppp/chap-secrets';
+const path = procces.env.PATH_PPP;
 
 // read file for admin
 const adminReadFile = async () => {
