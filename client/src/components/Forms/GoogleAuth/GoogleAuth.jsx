@@ -24,8 +24,8 @@ export default function GoogleAuth() {
   }, []);
 
   return (
-    <div>
-      <i id="signInDiv" className="fab fa-google" />
+    <div className="google">
+      <i id="signInDiv" />
     </div>
 
   );
