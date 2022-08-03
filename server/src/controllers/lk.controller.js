@@ -104,7 +104,7 @@ const getAccOne = async (req, res) => {
 /// ------- создание аккаунта ------///
 
 const createAcc = async (req, res) => {
-  const { id } = req.session.user;
+  const { id } = await req.session.user;
   try {
     const { acname, pass } = await req.body;
     const newAcc = await Account.create({
