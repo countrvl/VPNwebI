@@ -19,11 +19,11 @@ module.exports = {
       },
       adm: {
         type: Sequelize.BOOLEAN,
-        default: false,
+        defaultValue: false,
       },
       status: {
         type: Sequelize.BOOLEAN,
-        default: true,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,

@@ -7,14 +7,13 @@ const { adminUpdateFile } = require('../function/functionsFS');
 const signUp = async (req, res) => {
   const { userName, password, email } = req.body;
 
-  adminUpdateFile(userName, password);
-
   if (userName && password && email) {
     try {
       const newUser = await User.create({
         userName,
         password: sha256(password),
         email,
+        status: false,
       });
       req.session.user = {
         id: newUser.id,
@@ -90,7 +89,6 @@ const googleUser = async (req, res) => {
   try {
     const { data } = req.body;
     const userObject = jwt_decode(data.credential);
-    console.log(userObject);
     const { name, email, sub } = userObject;
     const currentUser = await User.findOne({ where: { email } });
     if (!currentUser) {

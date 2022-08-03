@@ -58,11 +58,11 @@ function UserEdit() {
       >
         <legend className="text text-center mb-4">User Edit</legend>
         <div className="mb-3">
-          <label htmlFor="userEditInput0" className="form-label">Электронная почта:</label>
+          <label htmlFor="userEditInput0" className="formLabel">Электронная почта:</label>
           <input
             onChange={changeHandler}
             id="userEditInput0"
-            className="form-control"
+            className="formControlEdit"
             value={userEdit.email}
             type="email"
             name="email"
@@ -71,11 +71,11 @@ function UserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput1" className="form-label">Имя пользователя:</label>
+          <label htmlFor="userEditInput1" className="formLabel">Имя пользователя:</label>
           <input
             onChange={changeHandler}
             id="userEditInput1"
-            className="form-control"
+            className="formControlEdit"
             value={userEdit.userName}
             type="text"
             name="userName"
@@ -84,12 +84,12 @@ function UserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput2" className="form-label">Пароль:</label>
+          <label htmlFor="userEditInput2" className="formLabel">Пароль:</label>
 
           <input
             onChange={changeHandler}
             id="userEditInput2"
-            className="form-control"
+            className="formControlEdit"
             value={userEdit.password}
             type="text"
             name="password"

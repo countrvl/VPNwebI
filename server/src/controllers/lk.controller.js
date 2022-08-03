@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 const sha256 = require('sha256');
 const { Account, User } = require('../../db/models');
 const { adminDeleteOneLine, adminUpdateFile, adminChangeUserData } = require('../function/functionsFS');
@@ -104,13 +105,13 @@ const getAccOne = async (req, res) => {
 /// ------- создание аккаунта ------///
 
 const createAcc = async (req, res) => {
-  const { id } = req.session.user;
+  const { id } = await req.session.user;
   try {
     const { acname, pass } = await req.body;
     const newAcc = await Account.create({
       ac_name: acname, pass, user_id: id, status: true,
     });
-    adminUpdateFile(acname, pass);
+    adminUpdateFile(newAcc.ac_name, newAcc.pass);
     return res.json(newAcc);
   } catch (error) {
     return res.sendStatus(500);
@@ -177,9 +178,17 @@ const adminEditUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
+    const accs = await Account.findAll({ where: { user_id: req.params.id }, raw:true })
+    if (accs.length !== 0) {
+      for (let i = 0; i < accs.length; i = i + 1) {
+        await adminDeleteOneLine(accs[i].ac_name);
+      }
+      await Account.destroy({where: {user_id: id}})
+    }
     await User.destroy({ where: { id } });
     return res.sendStatus(200);
   } catch (error) {
+    console.log(error);
     return res.sendStatus(500);
   }
 };
@@ -201,16 +210,94 @@ const getAllAccAdm = async (req, res) => {
 /// --------------блокировка юзера и всех его аккаунтов ------///
 
 const blockUser = async (req, res) => {
-  const { id } = req.params;
+  const { status } = req.body;
+  const accs = await Account.findAll({ where: { user_id: req.params.id }, raw: true });
   try {
-    const curUser = await User.findByPk(id);
-    const name = curUser.dataValues.userName;
-    adminDeleteOneLine(name);
-    return res.sendStatus(200);
+    if (!status) {
+      try {
+        await User.update(req.body, {
+          where: { id: req.params.id },
+          returning: true,
+          plain: true,
+          raw: true,
+        });
+      } catch (error) {
+        console.error('false user --->',error);
+      }
+      try {
+        if ( accs.length !== 0) {
+          await Account.update(req.body, {
+            where: { user_id: req.params.id },
+            returning: true,
+            plain: true,
+            raw: true,
+          });
+          for (let i = 0; i < accs.length; i = i + 1) {
+            await adminDeleteOneLine(accs[i].ac_name);
+          }
+        }
+      } catch (error) {
+        console.error('false fs&accs --->',error);
+      }
+      return res.json(req.body);
+    }
+    try {
+      await User.update(req.body, {
+        where: { id: req.params.id },
+        returning: true,
+        plain: true,
+        raw: true,
+      });
+    } catch (error) {
+      console.error('true user --->',error);
+    }
+    try {
+      if (accs.length !== 0) {
+        await Account.update(req.body, {
+          where: { user_id: req.params.id },
+          returning: true,
+          plain: true,
+          raw: true,
+        });
+        for (let i = 0; i < accs.length; i = i + 1) {
+          await adminUpdateFile(accs[i].ac_name, accs[i].pass);
+        }
+      }
+    } catch (error) {
+      console.error('true fs&accs --->',error);
+    }
+    return res.json(req.body);
   } catch (error) {
     return res.sendStatus(400);
   }
 };
+
+const blockAcc = async(req, res) => {
+  const { status } = req.body;
+  const acc = await Account.findOne({ where: { id: req.params.id }, raw: true });
+  try {
+    if (!status) {
+      await Account.update(req.body, {
+        where: { id: req.params.id },
+        returning: true,
+        plain: true,
+        raw: true,
+      });
+      await adminDeleteOneLine(acc.ac_name)
+      return res.json(req.body)
+    }
+    await Account.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+      plain: true,
+      raw: true,
+    });
+    await adminUpdateFile(acc.ac_name, acc.pass)
+    return res.json(req.body)
+  } catch (error) {
+    console.error('blockAcc ----->', error);
+  }
+}
 
 /// -------------разблокировка юзера и добавление новых  ------///
 // надо спросить
@@ -239,5 +326,6 @@ module.exports = {
   adminEditUser, //
   getAccOne, //
   blockUser, //
+  blockAcc, //
   // addNewUser, //
 };

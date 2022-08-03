@@ -1,19 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as endPoints from '../../config/endPoints';
 import { editAllAccsThunk } from '../../redux/actions/allAccsActions&Thunks/allAccsThunks';
+import { getAccBlkCheckThunk, setAccBlkCheckThunk } from '../../redux/actions/blockCheckActions&Thunks/blockCheckThunks';
 
 function AccsEdit() {
   const { id } = useParams();
 
+  const blkStatus = useSelector((store) => store.accBlkCheck);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
-  const [checkButt, setCheckButt] = useState(false);
+  console.log(blkStatus);
 
   const [acccEdit, setAccEdit] = useState({
     ac_name: '',
@@ -21,11 +22,11 @@ function AccsEdit() {
   });
 
   useEffect(() => {
+    dispatch(getAccBlkCheckThunk(id));
     axios.get(endPoints.getOneAcc(id))
       .then((response) => setAccEdit((prev) => ({
         ...prev,
         ac_name: response.data.ac_name,
-        pass: response.data.pass,
       })));
   }, []);
 
@@ -44,22 +45,21 @@ function AccsEdit() {
 
   const submitHandlerBlock = (e) => {
     e.preventDefault();
-    setCheckButt(!checkButt);
+    dispatch(setAccBlkCheckThunk(id, { status: !blkStatus }));
   };
 
   return (
     <div className="d-flex justify-content-center">
       <form
         onSubmit={submitHandler}
-        className="userEdit d-flex flex-column align-items-center"
+        className="from-control-userEdit d-flex flex-column align-items-center"
       >
         <legend className="text-center mb-4">Изменение аккаунта</legend>
         <div className="mb-3">
           <label htmlFor="userEditInput0" className="form-label">Имя аккаунта:</label>
           <input
             onChange={changeHandler}
-            id="userEditInput0"
-            className="form-control"
+            className="userEditInput"
             value={acccEdit.ac_name}
             type="text"
             name="ac_name"
@@ -71,8 +71,7 @@ function AccsEdit() {
           <label htmlFor="userEditInput1" className="form-label">Пароль:</label>
           <input
             onChange={changeHandler}
-            id="userEditInput1"
-            className="form-control"
+            className="userEditInput"
             value={acccEdit.pass}
             type="text"
             name="pass"
@@ -80,8 +79,8 @@ function AccsEdit() {
           />
         </div>
         <div className="d-flex justify-content-center">
-          <button type="button" onClick={submitHandlerBlock} className={checkButt ? 'btn btn-primary' : 'btn btn-danger'}>
-            {checkButt ? 'Разблокировать' : 'Заблокировать'}
+          <button type="button" onClick={submitHandlerBlock} className={blkStatus ? 'btn btn-danger' : 'btn btn-primary'}>
+            {blkStatus ? 'Заблокировать' : 'Разблокировать'}
           </button>
           <button type="submit" className="btn btn-primary ms-1">
             Изменить

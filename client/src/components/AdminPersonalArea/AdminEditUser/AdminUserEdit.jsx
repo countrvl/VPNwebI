@@ -6,35 +6,33 @@ import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction
 import Loader from '../../Loader/Loader';
 import * as endPoints from '../../../config/endPoints';
 import { editAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
+import { getUserBlkCheckThunk, setUserBlkCheckThunk } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckThunks';
 
 function AdminUserEdit() {
   const { id } = useParams();
-
-  const [checkButt, setCheckButt] = useState(false);
 
   const [userEdit, setUserEdit] = useState({
     email: '',
     userName: '',
     password: '',
     adm: '',
-    status: '',
+    status: true,
   });
 
-  const loader = useSelector((state) => state.loader);
+  const loader = useSelector((store) => store.loader);
+  const blkStatus = useSelector((store) => store.userBlkCheck);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(enableLoader());
+    dispatch(getUserBlkCheckThunk(id));
     fetch(endPoints.getUser(id), { credentials: 'include' })
       .then((response) => response.json())
       .then((userData) => setUserEdit((prev) => ({
         ...prev,
         email: userData.email,
         userName: userData.userName,
-        password: userData.password,
-        adm: userData.adm,
-        status: userData.status,
       })))
       .finally(() => {
         dispatch(disableLoader());
@@ -56,7 +54,7 @@ function AdminUserEdit() {
 
   const submitHandlerBlock = (e) => {
     e.preventDefault();
-    setCheckButt(!checkButt);
+    dispatch(setUserBlkCheckThunk(id, { status: !blkStatus }));
   };
 
   if (loader) return <Loader />;
@@ -65,11 +63,11 @@ function AdminUserEdit() {
     <div className="d-flex justify-content-center">
       <form
         onSubmit={submitHandler}
-        className="d-flex flex-column align-items-center bg-light text-dark p-3 border rounded-3"
+        className="userEdit flex-column align-items-center p-3 border rounded-3"
       >
         <legend className="text-center mb-4">User Edit</legend>
         <div className="mb-3">
-          <label htmlFor="userEditInput0" className="form-label">Электронная почта:</label>
+          <label htmlFor="userEditInput0" id="text" className="form-label">Электронная почта:</label>
           <input
             onChange={changeHandler}
             id="userEditInput0"
@@ -82,7 +80,7 @@ function AdminUserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput1" className="form-label">Имя пользователя:</label>
+          <label htmlFor="userEditInput1" className="text  form-label">Имя пользователя:</label>
           <input
             onChange={changeHandler}
             id="userEditInput1"
@@ -95,7 +93,7 @@ function AdminUserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput2" className="form-label">Пароль:</label>
+          <label htmlFor="userEditInput2" className="text  form-label">Пароль:</label>
 
           <input
             onChange={changeHandler}
@@ -109,7 +107,7 @@ function AdminUserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput3" className="form-label">Статус админа:</label>
+          <label htmlFor="userEditInput3" className="text  form-label">Статус админа:</label>
 
           <input
             onChange={changeHandler}
@@ -122,8 +120,8 @@ function AdminUserEdit() {
           />
         </div>
         <div className="d-flex justify-content-center">
-          <button type="button" onClick={submitHandlerBlock} className={checkButt ? 'btn btn-primary' : 'btn btn-danger'}>
-            {checkButt ? 'Разблокировать' : 'Заблокировать'}
+          <button type="button" onClick={submitHandlerBlock} className={blkStatus ? 'btn btn-danger' : 'btn btn-primary'}>
+            {blkStatus ? 'Заблокировать' : 'Разблокировать'}
           </button>
           <button type="submit" className="btn btn-primary ms-1">
             Изменить
