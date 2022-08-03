@@ -65,11 +65,11 @@ function AdminUserEdit() {
     <div className="d-flex justify-content-center">
       <form
         onSubmit={submitHandler}
-        className="d-flex flex-column align-items-center bg-light text-dark p-3 border rounded-3"
+        className="userEdit flex-column align-items-center p-3 border rounded-3"
       >
         <legend className="text-center mb-4">User Edit</legend>
         <div className="mb-3">
-          <label htmlFor="userEditInput0" className="form-label">Электронная почта:</label>
+          <label htmlFor="userEditInput0" id="text" className="form-label">Электронная почта:</label>
           <input
             onChange={changeHandler}
             id="userEditInput0"
@@ -82,7 +82,7 @@ function AdminUserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput1" className="form-label">Имя пользователя:</label>
+          <label htmlFor="userEditInput1" className="text  form-label">Имя пользователя:</label>
           <input
             onChange={changeHandler}
             id="userEditInput1"
@@ -95,7 +95,7 @@ function AdminUserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput2" className="form-label">Пароль:</label>
+          <label htmlFor="userEditInput2" className="text  form-label">Пароль:</label>
 
           <input
             onChange={changeHandler}
@@ -109,7 +109,7 @@ function AdminUserEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="userEditInput3" className="form-label">Статус админа:</label>
+          <label htmlFor="userEditInput3" className="text  form-label">Статус админа:</label>
 
           <input
             onChange={changeHandler}

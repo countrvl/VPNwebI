@@ -51,15 +51,14 @@ function AccsEdit() {
     <div className="d-flex justify-content-center">
       <form
         onSubmit={submitHandler}
-        className="userEdit d-flex flex-column align-items-center"
+        className="from-control-userEdit d-flex flex-column align-items-center"
       >
         <legend className="text-center mb-4">Изменение аккаунта</legend>
         <div className="mb-3">
           <label htmlFor="userEditInput0" className="form-label">Имя аккаунта:</label>
           <input
             onChange={changeHandler}
-            id="userEditInput0"
-            className="form-control"
+            className="userEditInput"
             value={acccEdit.ac_name}
             type="text"
             name="ac_name"
@@ -71,8 +70,7 @@ function AccsEdit() {
           <label htmlFor="userEditInput1" className="form-label">Пароль:</label>
           <input
             onChange={changeHandler}
-            id="userEditInput1"
-            className="form-control"
+            className="userEditInput"
             value={acccEdit.pass}
             type="text"
             name="pass"
