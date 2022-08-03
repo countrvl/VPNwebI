@@ -6,8 +6,8 @@ import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction
 import Loader from '../../Loader/Loader';
 import * as endPoints from '../../../config/endPoints';
 import { editAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
-import { blockCheckThunk } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckThunks';
-import { blockCheckAC } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckActions';
+import { getblockCheckThunk, setblockCheckThunk } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckThunks';
+import { setblockCheckAC } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckActions';
 
 function AdminUserEdit() {
   const { id } = useParams();
@@ -21,12 +21,13 @@ function AdminUserEdit() {
   });
 
   const loader = useSelector((store) => store.loader);
-  const blkStatus = useSelector((store) => store.blkCheck);
+  const blkStatus = useSelector((store) => store.userBlkCheck);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(enableLoader());
+    dispatch(getblockCheckThunk(id));
     fetch(endPoints.getUser(id), { credentials: 'include' })
       .then((response) => response.json())
       .then((userData) => setUserEdit((prev) => ({
@@ -54,9 +55,10 @@ function AdminUserEdit() {
 
   const submitHandlerBlock = (e) => {
     e.preventDefault();
-    dispatch(blockCheckThunk(id, { status: blkStatus }));
-    dispatch(blockCheckAC(!blkStatus));
+    dispatch(setblockCheckThunk(id, { status: !blkStatus }));
   };
+
+  console.log(blkStatus);
 
   if (loader) return <Loader />;
 
@@ -121,8 +123,8 @@ function AdminUserEdit() {
           />
         </div>
         <div className="d-flex justify-content-center">
-          <button type="button" onClick={submitHandlerBlock} className={blkStatus ? 'btn btn-primary' : 'btn btn-danger'}>
-            {blkStatus ? 'Разблокировать' : 'Заблокировать'}
+          <button type="button" onClick={submitHandlerBlock} className={blkStatus ? 'btn btn-danger' : 'btn btn-primary'}>
+            {blkStatus ? 'Заблокировать' : 'Разблокировать'}
           </button>
           <button type="submit" className="btn btn-primary ms-1">
             Изменить
