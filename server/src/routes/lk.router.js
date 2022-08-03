@@ -27,5 +27,6 @@ lkRouter.delete('/accs/:id', checkAuth, usersController.deleteAcc);
 lkRouter.patch('/accs/:id', checkAuth, usersController.editAcc);
 lkRouter.get('/allaccs/:id', checkAuth, usersController.getAllAccAdm);
 lkRouter.get('/oneacc/:id', checkAuth, usersController.getAccOne);
+lkRouter.patch('/oneacc/:id', checkAuth, usersController.blockAcc)
 
 module.exports = lkRouter;
