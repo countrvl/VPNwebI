@@ -15,6 +15,7 @@ const signUp = async (req, res) => {
         userName,
         password: sha256(password),
         email,
+        status: false,
       });
       req.session.user = {
         id: newUser.id,
