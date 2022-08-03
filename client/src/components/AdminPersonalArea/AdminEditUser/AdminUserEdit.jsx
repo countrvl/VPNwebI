@@ -57,8 +57,6 @@ function AdminUserEdit() {
     dispatch(setUserBlkCheckThunk(id, { status: !blkStatus }));
   };
 
-  console.log(blkStatus);
-
   if (loader) return <Loader />;
 
   return (

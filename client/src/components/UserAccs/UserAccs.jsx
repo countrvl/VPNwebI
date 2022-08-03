@@ -11,11 +11,7 @@ function UserAccs() {
     pass: '',
   });
 
-  console.log(input);
-
   const list = useSelector((store) => store.allAccs);
-
-  console.log(list);
 
   const dispatch = useDispatch();
 
@@ -33,7 +29,7 @@ function UserAccs() {
       [e.target.name]: e.target.value,
     }));
   };
-  console.log(input);
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addAllAccsThunk(input));
