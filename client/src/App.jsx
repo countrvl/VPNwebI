@@ -35,7 +35,7 @@ function App() {
   };
 
   return (
-    <div data-theme={theme}>
+    <div data-theme={theme} className="wrapper">
       <Nav switchTheme={switchTheme} theme={theme} />
       <div className="container py-5">
         <Routes>
