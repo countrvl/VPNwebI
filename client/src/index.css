@@ -83,12 +83,12 @@ code {
 }
 
 .nav-link-light {
-  color: var(--text-rimary);
+  color: var(--text-primary);
   padding-left: 13px;
 }
 
 .theme {
-  font-size: 2rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -108,12 +108,7 @@ code {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  align: center;
-}
-
-.top i {
-  font-size: 2rem;
-  color: var(--text-primary);
+  justify-content: center;
 }
 
 .userAcc {
@@ -146,6 +141,48 @@ code {
   color: var(--text-primary);
 }
 
+.formControl {
+  padding: 8px;
+  width: 300px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.formControlEdit {
+  padding: 8px;
+  width: 300px;
+  margin-bottom: 8px;
+  margin-left: 17px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.userEditInput {
+  padding: 8px;
+  width: 300px;
+  margin-bottom: 8px;
+  margin-left: 17px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.from-control-userEdit {
+  padding: 10px;
+  width: 390px;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+}
+
 .myAccText {
   padding: 7px;
   width: 500px;
@@ -161,6 +198,12 @@ code {
   color: var(--text-primary);
 }
 
+.formLabel {
+  color: var(--text-primary);
+  margin-left: 17px;
+  margin-bottom: 5px;
+}
+
 .userEdit {
   padding: 8px;
   width: 350px;
@@ -171,6 +214,35 @@ code {
   color: var(--text-primary);
 }
 
-.google {
-  padding-left: 80px;
+.switchTheme {
+  width: 55px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.adminForm {
+  background: var(--background);
+  color: var(--text-primary);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.allUser {
+  background: var(--background);
+  color: var(--text-primary);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.list-group-item, .userEdit {
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
 }

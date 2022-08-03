@@ -28,15 +28,15 @@ function SignUp() {
       <form onSubmit={submitHandler} className="signForm">
         <legend className="text text-center mb-4">User Sign Up</legend>
         <div className="mb-3">
-          <input onChange={changeHandler} className="form-control" value={userSignUp.email} type="email" name="email" placeholder="Email" />
+          <input onChange={changeHandler} className="formControl" value={userSignUp.email} type="email" name="email" placeholder="Email" />
         </div>
 
         <div className="mb-3">
-          <input onChange={changeHandler} className="form-control" value={userSignUp.userName} type="text" name="userName" placeholder="Name" />
+          <input onChange={changeHandler} className="formControl" value={userSignUp.userName} type="text" name="userName" placeholder="Name" />
         </div>
 
         <div className="mb-3">
-          <input onChange={changeHandler} className="form-control" value={userSignUp.password} type="password" name="password" placeholder="Pass" />
+          <input onChange={changeHandler} className="formControl" value={userSignUp.password} type="password" name="password" placeholder="Pass" />
         </div>
 
         <button type="submit" className="btn">Sign Up</button>

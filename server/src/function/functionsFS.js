@@ -1,6 +1,9 @@
+
+require('dotenv').config();
 const fs = require('fs').promises;
 
-const path = '/Users/artemkulikov/Desktop/VPNwebI/server/db/etc/ppp/chap-secrets';
+// const { PATH_PPP} = process.env;
+const path = process.env.PATH_PPP;
 
 // read file for admin
 const adminReadFile = async () => {
@@ -31,5 +34,4 @@ module.exports = {
   adminUpdateFile,
   adminDeleteOneLine,
   adminChangeUserData,
-
 };

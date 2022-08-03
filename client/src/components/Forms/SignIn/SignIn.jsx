@@ -34,7 +34,7 @@ function SignIn() {
           <input
             onChange={changeHandler}
             value={userSignIn.email}
-            className="form-control"
+            className="formControl"
             type="email"
             name="email"
             placeholder="Email"
@@ -45,7 +45,7 @@ function SignIn() {
           <input
             onChange={changeHandler}
             value={userSignIn.password}
-            className="form-control"
+            className="formControl"
             type="password"
             name="password"
             placeholder="Pass"

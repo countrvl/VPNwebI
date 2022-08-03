@@ -60,10 +60,8 @@ function UserAccs() {
               , Пароль:
               {' '}
               <strong>**********</strong>
-
               <Link to={`/accs/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
               <button onClick={() => deleteHandler(acc.id)} className="btn btn-danger ms-2" type="button">удалить</button>
-
             </div>
           )).reverse()}
         </div>

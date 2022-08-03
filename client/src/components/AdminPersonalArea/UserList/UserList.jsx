@@ -38,20 +38,20 @@ function UserList() {
         {list.map((user) => (
           <div
             key={user.id}
-            className={`list-group-item list-group-item-action ${
+            className={`list-group-item list-group-item ${
               userId === user.id ? 'active' : ''
             }`}
           >
             Имя:
             {' '}
-            <strong>{user.userName}</strong>
+            <strong className="text">{user.userName}</strong>
             , E-Mail:
             {' '}
-            <strong>{user.email}</strong>
+            <strong className="text">{user.email}</strong>
             {' '}
             , Статус:
             {' '}
-            <strong>{user.status ? 'разблокирован' : 'заблокирован'}</strong>
+            <strong className="text">{user.status ? 'разблокирован' : 'заблокирован'}</strong>
             {user.email === currentUser.email ? (
               <Link to="/myuser"><button className="btn btn-light text-primary ms-2" type="button">изменить</button></Link>
             ) : (

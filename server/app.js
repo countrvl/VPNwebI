@@ -9,7 +9,7 @@ const lkRouter = require('./src/routes/lk.router');
 
 const app = express();
 
-const { PORT, COOKIE_SECRET, COOKIE_NAME } = process.env;
+const { PORT, COOKIE_SECRET, COOKIE_NAME, CORS_ORIGIN} = process.env;
 
 // SERVER'S SETTINGS
 app.set('cookieName', COOKIE_NAME);
@@ -17,7 +17,8 @@ app.set('cookieName', COOKIE_NAME);
 // APP'S MIDDLEWARES
 app.use(
   cors({
-    origin: true,
+    origin: CORS_ORIGIN,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   }),
 );
