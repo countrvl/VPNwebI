@@ -1,19 +1,19 @@
 import axios from 'axios';
 import * as endPoints from '../../../config/endPoints';
-import { getUserBlkCheckAC, setUserBlkCheckAC } from './blockCheckActions';
+import { getblockCheckAC, setblockCheckAC } from './blockCheckActions';
 
-export const getUserBlkCheckThunk = (id) => (dispatch) => {
+export const getblockCheckThunk = (id) => (dispatch) => {
   axios.get(endPoints.getUser(id))
     .then((response) => {
       const { status } = response.data;
-      dispatch(getUserBlkCheckAC(status));
+      dispatch(getblockCheckAC(status));
     });
 };
 
-export const setUserBlkCheckThunk = (id, updatedFields) => (dispatch) => {
+export const setblockCheckThunk = (id, updatedFields) => (dispatch) => {
   axios.patch(endPoints.blockUser(id), updatedFields)
     .then((response) => {
       const { status } = response.data;
-      dispatch(setUserBlkCheckAC(status));
+      dispatch(setblockCheckAC(status));
     });
 };
