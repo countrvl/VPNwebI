@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import accBlockCheckReducer from './accBlockCheckReducer';
 import allAccsReducer from './allAccsReducer';
 import allUsersReducer from './allUsersReducer';
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   allUsers: allUsersReducer,
   userBlkCheck: userblockCheckReducer,
   allAccs: allAccsReducer,
+  accBlkCheck: accBlockCheckReducer,
   loader: loaderReducer,
   googleAuth: googleAuthReducer,
 });

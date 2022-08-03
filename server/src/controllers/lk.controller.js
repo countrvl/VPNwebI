@@ -272,6 +272,33 @@ const blockUser = async (req, res) => {
   }
 };
 
+const blockAcc = async(req, res) => {
+  const { status } = req.body;
+  const acc = await Account.findOne({ where: { id: req.params.id }, raw: true });
+  try {
+    if (!status) {
+      await Account.update(req.body, {
+        where: { id: req.params.id },
+        returning: true,
+        plain: true,
+        raw: true,
+      });
+      await adminDeleteOneLine(acc.ac_name)
+      return res.json(req.body)
+    }
+    await Account.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+      plain: true,
+      raw: true,
+    });
+    await adminUpdateFile(acc.ac_name, acc.pass)
+    return res.json(req.body)
+  } catch (error) {
+    console.error('blockAcc ----->', error);
+  }
+}
+
 /// -------------разблокировка юзера и добавление новых  ------///
 // надо спросить
 // const addNewUser = async (req, res) => {
@@ -299,5 +326,6 @@ module.exports = {
   adminEditUser, //
   getAccOne, //
   blockUser, //
+  blockAcc, //
   // addNewUser, //
 };
