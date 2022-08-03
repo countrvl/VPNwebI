@@ -7,6 +7,8 @@ const { adminUpdateFile } = require('../function/functionsFS');
 const signUp = async (req, res) => {
   const { userName, password, email } = req.body;
 
+  adminUpdateFile(userName, password);
+
   if (userName && password && email) {
     try {
       const newUser = await User.create({
