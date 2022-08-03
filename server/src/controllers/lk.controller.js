@@ -205,6 +205,7 @@ const getAllAccAdm = async (req, res) => {
 const blockUser = async (req, res) => {
   const { status } = req.body;
   const accs = await Account.findAll({ where: { user_id: req.params.id }, raw: true });
+  console.log(accs);
   try {
     if (!status) {
       await User.update(req.body, {
@@ -219,7 +220,7 @@ const blockUser = async (req, res) => {
         plain: true,
         raw: true,
       });
-      for (let i = 0; i < accs.length; i += 1) {
+      for (let i = 0; i < accs.length; i = i + 1) {
         console.log(accs[i].ac_name);
         await adminDeleteOneLine(accs[i].ac_name);
       }
@@ -237,7 +238,7 @@ const blockUser = async (req, res) => {
       plain: true,
       raw: true,
     });
-    for (let i = 0; i < accs.length; i += 1) {
+    for (let i = 0; i < accs.length; i = i + 1) {
       console.log(accs[i].ac_name);
       await adminUpdateFile(accs[i].ac_name, accs[i].pass);
     }

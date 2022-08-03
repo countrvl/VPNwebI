@@ -6,8 +6,7 @@ import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction
 import Loader from '../../Loader/Loader';
 import * as endPoints from '../../../config/endPoints';
 import { editAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
-import { getblockCheckThunk, setblockCheckThunk } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckThunks';
-import { setblockCheckAC } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckActions';
+import { getUserBlkCheckThunk, setUserBlkCheckThunk } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckThunks';
 
 function AdminUserEdit() {
   const { id } = useParams();
@@ -27,7 +26,7 @@ function AdminUserEdit() {
 
   useEffect(() => {
     dispatch(enableLoader());
-    dispatch(getblockCheckThunk(id));
+    dispatch(getUserBlkCheckThunk(id));
     fetch(endPoints.getUser(id), { credentials: 'include' })
       .then((response) => response.json())
       .then((userData) => setUserEdit((prev) => ({
@@ -55,7 +54,7 @@ function AdminUserEdit() {
 
   const submitHandlerBlock = (e) => {
     e.preventDefault();
-    dispatch(setblockCheckThunk(id, { status: !blkStatus }));
+    dispatch(setUserBlkCheckThunk(id, { status: !blkStatus }));
   };
 
   console.log(blkStatus);
