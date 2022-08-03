@@ -6,35 +6,34 @@ import { disableLoader, enableLoader } from '../../../redux/actions/loaderAction
 import Loader from '../../Loader/Loader';
 import * as endPoints from '../../../config/endPoints';
 import { editAllUserThunk } from '../../../redux/actions/allUsersActions&Thunks/allUsersThunks';
+import { getblockCheckThunk, setblockCheckThunk } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckThunks';
+import { setblockCheckAC } from '../../../redux/actions/blockCheckActions&Thunks/blockCheckActions';
 
 function AdminUserEdit() {
   const { id } = useParams();
-
-  const [checkButt, setCheckButt] = useState(false);
 
   const [userEdit, setUserEdit] = useState({
     email: '',
     userName: '',
     password: '',
     adm: '',
-    status: '',
+    status: true,
   });
 
-  const loader = useSelector((state) => state.loader);
+  const loader = useSelector((store) => store.loader);
+  const blkStatus = useSelector((store) => store.userBlkCheck);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(enableLoader());
+    dispatch(getblockCheckThunk(id));
     fetch(endPoints.getUser(id), { credentials: 'include' })
       .then((response) => response.json())
       .then((userData) => setUserEdit((prev) => ({
         ...prev,
         email: userData.email,
         userName: userData.userName,
-        password: userData.password,
-        adm: userData.adm,
-        status: userData.status,
       })))
       .finally(() => {
         dispatch(disableLoader());
@@ -56,8 +55,10 @@ function AdminUserEdit() {
 
   const submitHandlerBlock = (e) => {
     e.preventDefault();
-    setCheckButt(!checkButt);
+    dispatch(setblockCheckThunk(id, { status: !blkStatus }));
   };
+
+  console.log(blkStatus);
 
   if (loader) return <Loader />;
 
@@ -122,8 +123,8 @@ function AdminUserEdit() {
           />
         </div>
         <div className="d-flex justify-content-center">
-          <button type="button" onClick={submitHandlerBlock} className={checkButt ? 'btn btn-primary' : 'btn btn-danger'}>
-            {checkButt ? 'Разблокировать' : 'Заблокировать'}
+          <button type="button" onClick={submitHandlerBlock} className={blkStatus ? 'btn btn-danger' : 'btn btn-primary'}>
+            {blkStatus ? 'Заблокировать' : 'Разблокировать'}
           </button>
           <button type="submit" className="btn btn-primary ms-1">
             Изменить

@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 const sha256 = require('sha256');
 const { Account, User } = require('../../db/models');
 const { adminDeleteOneLine, adminUpdateFile, adminChangeUserData } = require('../function/functionsFS');
@@ -110,7 +111,7 @@ const createAcc = async (req, res) => {
     const newAcc = await Account.create({
       ac_name: acname, pass, user_id: id, status: true,
     });
-    adminUpdateFile(acname, pass);
+    adminUpdateFile(newAcc.ac_name, newAcc.pass);
     return res.json(newAcc);
   } catch (error) {
     return res.sendStatus(500);
@@ -158,6 +159,7 @@ const adminEditUser = async (req, res) => {
     }
     try {
       // eslint-disable-next-line max-len
+      console.log(updatedFields);
       const [, updatedUser] = await User.update(updatedFields, {
         where: { id: req.params.id },
         returning: true,
@@ -201,12 +203,45 @@ const getAllAccAdm = async (req, res) => {
 /// --------------блокировка юзера и всех его аккаунтов ------///
 
 const blockUser = async (req, res) => {
-  const { id } = req.params;
+  const { status } = req.body;
+  const accs = await Account.findAll({ where: { user_id: req.params.id }, raw: true });
   try {
-    const curUser = await User.findByPk(id);
-    const name = curUser.dataValues.userName;
-    adminDeleteOneLine(name);
-    return res.sendStatus(200);
+    if (!status) {
+      await User.update(req.body, {
+        where: { id: req.params.id },
+        returning: true,
+        plain: true,
+        raw: true,
+      });
+      await Account.update(req.body, {
+        where: { user_id: req.params.id },
+        returning: true,
+        plain: true,
+        raw: true,
+      });
+      for (let i = 0; i < accs.length; i += 1) {
+        console.log(accs[i].ac_name);
+        await adminDeleteOneLine(accs[i].ac_name);
+      }
+      return res.json(req.body);
+    }
+    await User.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+      plain: true,
+      raw: true,
+    });
+    await Account.update(req.body, {
+      where: { user_id: req.params.id },
+      returning: true,
+      plain: true,
+      raw: true,
+    });
+    for (let i = 0; i < accs.length; i += 1) {
+      console.log(accs[i].ac_name);
+      await adminUpdateFile(accs[i].ac_name, accs[i].pass);
+    }
+    return res.json(req.body);
   } catch (error) {
     return res.sendStatus(400);
   }

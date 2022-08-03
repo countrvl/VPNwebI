@@ -25,7 +25,6 @@ function AccsEdit() {
       .then((response) => setAccEdit((prev) => ({
         ...prev,
         ac_name: response.data.ac_name,
-        pass: response.data.pass,
       })));
   }, []);
 
