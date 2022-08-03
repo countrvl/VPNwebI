@@ -89,7 +89,6 @@ const googleUser = async (req, res) => {
   try {
     const { data } = req.body;
     const userObject = jwt_decode(data.credential);
-    console.log(userObject);
     const { name, email, sub } = userObject;
     const currentUser = await User.findOne({ where: { email } });
     if (!currentUser) {

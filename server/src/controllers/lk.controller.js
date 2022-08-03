@@ -159,7 +159,6 @@ const adminEditUser = async (req, res) => {
     }
     try {
       // eslint-disable-next-line max-len
-      console.log(updatedFields);
       const [, updatedUser] = await User.update(updatedFields, {
         where: { id: req.params.id },
         returning: true,
@@ -179,9 +178,17 @@ const adminEditUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
+    const accs = await Account.findAll({ where: { user_id: req.params.id }, raw:true })
+    if (accs.length !== 0) {
+      for (let i = 0; i < accs.length; i = i + 1) {
+        await adminDeleteOneLine(accs[i].ac_name);
+      }
+      await Account.destroy({where: {user_id: id}})
+    }
     await User.destroy({ where: { id } });
     return res.sendStatus(200);
   } catch (error) {
+    console.log(error);
     return res.sendStatus(500);
   }
 };
@@ -205,42 +212,59 @@ const getAllAccAdm = async (req, res) => {
 const blockUser = async (req, res) => {
   const { status } = req.body;
   const accs = await Account.findAll({ where: { user_id: req.params.id }, raw: true });
-  console.log(accs);
   try {
     if (!status) {
+      try {
+        await User.update(req.body, {
+          where: { id: req.params.id },
+          returning: true,
+          plain: true,
+          raw: true,
+        });
+      } catch (error) {
+        console.error('false user --->',error);
+      }
+      try {
+        if ( accs.length !== 0) {
+          await Account.update(req.body, {
+            where: { user_id: req.params.id },
+            returning: true,
+            plain: true,
+            raw: true,
+          });
+          for (let i = 0; i < accs.length; i = i + 1) {
+            await adminDeleteOneLine(accs[i].ac_name);
+          }
+        }
+      } catch (error) {
+        console.error('false fs&accs --->',error);
+      }
+      return res.json(req.body);
+    }
+    try {
       await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,
         plain: true,
         raw: true,
       });
-      await Account.update(req.body, {
-        where: { user_id: req.params.id },
-        returning: true,
-        plain: true,
-        raw: true,
-      });
-      for (let i = 0; i < accs.length; i = i + 1) {
-        console.log(accs[i].ac_name);
-        await adminDeleteOneLine(accs[i].ac_name);
-      }
-      return res.json(req.body);
+    } catch (error) {
+      console.error('true user --->',error);
     }
-    await User.update(req.body, {
-      where: { id: req.params.id },
-      returning: true,
-      plain: true,
-      raw: true,
-    });
-    await Account.update(req.body, {
-      where: { user_id: req.params.id },
-      returning: true,
-      plain: true,
-      raw: true,
-    });
-    for (let i = 0; i < accs.length; i = i + 1) {
-      console.log(accs[i].ac_name);
-      await adminUpdateFile(accs[i].ac_name, accs[i].pass);
+    try {
+      if (accs.length !== 0) {
+        await Account.update(req.body, {
+          where: { user_id: req.params.id },
+          returning: true,
+          plain: true,
+          raw: true,
+        });
+        for (let i = 0; i < accs.length; i = i + 1) {
+          await adminUpdateFile(accs[i].ac_name, accs[i].pass);
+        }
+      }
+    } catch (error) {
+      console.error('true fs&accs --->',error);
     }
     return res.json(req.body);
   } catch (error) {
