@@ -36,8 +36,9 @@ function UserAccs() {
     e.preventDefault();
     if (user?.status) {
       dispatch(addAllAccsThunk(input));
+    } else {
+      alert('Вы заблокированы, обратитесь к Администратору');
     }
-    alert('Вы заблокированы, обратитесь к Администратору');
   };
 
   return (

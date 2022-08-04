@@ -5,6 +5,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getGoogleDataThunk } from '../../../redux/actions/googleAuthActions';
 /* global google */
 
@@ -12,9 +13,10 @@ const { REACT_APP_GOOGLE_AUTH: auth } = process.env;
 
 export default function GoogleAuth() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleCallbackResponse(response) {
-    dispatch(getGoogleDataThunk(response));
+    dispatch(getGoogleDataThunk(response, navigate));
   }
 
   useEffect(() => {
