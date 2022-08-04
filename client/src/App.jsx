@@ -30,17 +30,15 @@ function App() {
 
   // eslint-disable-next-line no-constant-condition
   const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
-  const [butTheme, setButTheme] = useState(false);
 
   const switchTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    setButTheme(!butTheme);
   };
 
   return (
     <div data-theme={theme} className="wrapper">
-      <Nav switchTheme={switchTheme} theme={theme} butTheme={butTheme} />
+      <Nav switchTheme={switchTheme} theme={theme} />
       <div className="container py-5">
         <Routes>
           <Route path="/" element={<Main />} />

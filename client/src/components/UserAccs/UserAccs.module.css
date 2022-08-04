@@ -1,7 +1,8 @@
 .scroll {
-  height: 50vh;
-  padding: 0.5rem !important;
+  height: 43vh;
+  width: 59vw;
+  padding: 0.3rem !important;
   overflow-y: scroll;
-  border: 3px ridge rgb(82, 80, 255);
+  border: 2px ridge rgb(82, 80, 255);
   background-color: white;
 }

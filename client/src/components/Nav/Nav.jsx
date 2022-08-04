@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import React, { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-function Nav({ switchTheme, theme, butTheme }) {
+function Nav({ switchTheme, theme }) {
   const user = useSelector((state) => state.user);
 
   return (
@@ -44,7 +45,7 @@ function Nav({ switchTheme, theme, butTheme }) {
           </div>
 
           <div className="theme">
-            <button type="button" onClick={switchTheme} className="switchTheme fs-5">{butTheme ? '🌕' : '🌑'}</button>
+            <button type="button" onClick={switchTheme} className="switchTheme fs-5">{theme === 'dark' ? '⚪' : '🌑'}</button>
           </div>
         </div>
       </div>

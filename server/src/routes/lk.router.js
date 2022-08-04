@@ -21,12 +21,25 @@ lkRouter.patch('/blockuser/:id', checkAuth, usersController.blockUser); /// не
 
 /// / ---- аккаунты ---///
 
-lkRouter.post('/newacc', checkAuth, usersController.createAcc);
-lkRouter.get('/myaccs', usersController.getAllAcc);
-lkRouter.delete('/accs/:id', checkAuth, usersController.deleteAcc);
-lkRouter.patch('/accs/:id', checkAuth, usersController.editAcc);
-lkRouter.get('/allaccs/:id', checkAuth, usersController.getAllAccAdm);
-lkRouter.get('/oneacc/:id', checkAuth, usersController.getAccOne);
-lkRouter.patch('/oneacc/:id', checkAuth, usersController.blockAcc)
+lkRouter.route('/acc')
+  .get(checkAuth, usersController.getAllAcc)
+  .post(checkAuth, usersController.createAcc);
+
+lkRouter.route('/accs/:id')
+  .get(checkAuth, usersController.getAllAccAdm)
+  .patch(checkAuth, usersController.editAcc)
+  .delete(checkAuth, usersController.deleteAcc); 
+
+lkRouter.route('/oneacc/:id')
+  .get(checkAuth, usersController.getAccOne)
+  .patch(checkAuth, usersController.blockAcc);
+
+// lkRouter.post('/newacc', checkAuth, usersController.createAcc);
+// lkRouter.get('/myaccs', usersController.getAllAcc);
+// lkRouter.delete('/accs/:id', checkAuth, usersController.deleteAcc);
+// lkRouter.patch('/accs/:id', checkAuth, usersController.editAcc);
+// lkRouter.get('/allaccs/:id', checkAuth, usersController.getAllAccAdm);
+// lkRouter.get('/oneacc/:id', checkAuth, usersController.getAccOne);
+// lkRouter.patch('/oneacc/:id', checkAuth, usersController.blockAcc)
 
 module.exports = lkRouter;
