@@ -44,7 +44,7 @@ function Nav({ switchTheme, theme, butTheme }) {
           </div>
 
           <div className="theme">
-            <button type="button" onClick={switchTheme} className="switchTheme fs-5">{butTheme ? '🌑' : '🌕'}</button>
+            <button type="button" onClick={switchTheme} className="switchTheme fs-5">{butTheme ? '🌕' : '🌑'}</button>
           </div>
         </div>
       </div>
