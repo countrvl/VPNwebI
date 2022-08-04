@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

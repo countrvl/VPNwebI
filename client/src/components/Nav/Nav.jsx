@@ -14,7 +14,7 @@ function Nav({ switchTheme, theme }) {
           </Link>
           <div className=" navbar-collapse ms-10" id="navbarNav">
             <ul className="navbar-nav">
-              {user ? (
+              {user?.email ? (
                 <>
                   <li className="nav-item">
                     <NavLink

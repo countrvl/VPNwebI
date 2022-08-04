@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { DELETE_USER, SET_USER } from '../types/userTypes';
 import * as endPoints from '../../config/endPoints';
 import { disableLoader, enableLoader } from './loaderAction';
@@ -32,7 +33,7 @@ export const signUp = (payload, navigate) => async (dispatch) => {
   if (response.status === 200) {
     const user = await response.json();
     dispatch(setUser(user));
-    navigate('/');
+    navigate('/personalarea');
   } else {
     navigate('/auth/signup');
   }
@@ -52,7 +53,7 @@ export const signIn = (payload, navigate) => async (dispatch) => {
   if (response.status === 200) {
     const user = await response.json();
     dispatch(setUser(user));
-    navigate('/');
+    navigate('/personalarea');
   } else {
     navigate('/auth/signin');
   }

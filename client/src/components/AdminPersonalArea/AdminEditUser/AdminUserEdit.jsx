@@ -65,7 +65,7 @@ function AdminUserEdit() {
         onSubmit={submitHandler}
         className="userEdit flex-column align-items-center p-3 border rounded-3"
       >
-        <legend className="text-center mb-4">User Edit</legend>
+        <legend className="text-center mb-4">Изменение учётной записи:</legend>
         <div className="mb-3">
           <label htmlFor="userEditInput0" id="text" className="form-label">Электронная почта:</label>
           <input

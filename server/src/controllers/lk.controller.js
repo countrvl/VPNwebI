@@ -39,9 +39,7 @@ const getUser = async (req, res) => {
     const currentUser = await User.findByPk(id);
     // const name = currentUser.User.dataValues.userName;
     // console.log('NAMMMMMMEEEEE', name);
-    setTimeout(() => {
       res.json(currentUser);
-    }, 2e3);
   } catch (error) {
     res.sendStatus(500);
   }
