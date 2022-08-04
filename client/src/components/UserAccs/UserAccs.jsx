@@ -42,35 +42,26 @@ function UserAccs() {
   };
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <div className="createAcc card">
-        <form onSubmit={submitHandler} className="p-1 d-flex flex-column">
-          <input type="text" onChange={changeHandler} name="acname" value={input.acname} placeholder="Логин" className="from-control" />
-          <input type="password" onChange={changeHandler} name="pass" value={input.pass} placeholder="Пароль" className="from-control mt-1" />
-          <button type="submit" className="btn btn-primary">Создать Аккаунт</button>
-        </form>
-      </div>
-      <div className="mt-3 d-flex flex-column align-items-center">
-        <h3><label htmlFor="listAccs" className="fs-4">Мои аккаунты:</label></h3>
-        {list.length
-          ? (
-            <div className={`list-group ${styles.scroll}`} id="listAccs">
-              {list?.map((acc) => (
-                <div className="myAccText list-group-item mt-1" key={acc.id}>
-                  Логин:
-                  {' '}
-                  <strong>{acc.ac_name}</strong>
-                  {' '}
-                  , Пароль:
-                  {' '}
-                  <strong>**********</strong>
-                  <Link to={`/accs/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
-                  <button onClick={() => deleteHandler(acc.id)} className="btn btn-danger ms-2" type="button">удалить</button>
-                </div>
-              )).reverse()}
-            </div>
-          ) : <h1>СПИСОК ПУСТ</h1>}
-      </div>
+    <div className="mt-3 d-flex flex-column align-items-center w-75">
+      <h3><label htmlFor="listAccs" className="fs-4">Мои аккаунты:</label></h3>
+      {list.length
+        ? (
+          <div className={`list-group ${styles.scroll}`} id="listAccs">
+            {list?.map((acc) => (
+              <div className="myAccText list-group-item mt-1 w-100" key={acc.id}>
+                Логин:
+                {' '}
+                <strong>{acc.ac_name}</strong>
+                {' '}
+                , Пароль:
+                {' '}
+                <strong>**********</strong>
+                <Link to={`/accs/${acc.id}`}><button className="btn btn-primary ms-2" type="button">изменить</button></Link>
+                <button onClick={() => deleteHandler(acc.id)} className="btn btn-danger ms-2" type="button">удалить</button>
+              </div>
+            )).reverse()}
+          </div>
+        ) : <h1>СПИСОК ПУСТ</h1>}
     </div>
   );
 }

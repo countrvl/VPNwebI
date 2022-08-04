@@ -136,8 +136,8 @@ code {
 
 .userAcc {
   padding: 8px;
-  width: 300px;
-  margin-bottom: 8px;
+  height: 14.5rem;
+  width: 20vw;
   border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--background);
@@ -146,9 +146,9 @@ code {
 }
 
 .createAcc {
+  height: 14.5rem;
   padding: 13px;
-  width: 500px;
-  margin-bottom: 8px;
+  width: 34.5vw;
   border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--background);
@@ -156,9 +156,10 @@ code {
   box-shadow: 0px 0px 12px var(--border);
 }
 
+
 .from-control {
   padding: 8px;
-  width: 460px;
+  width: 32vw;
   margin-bottom: 8px;
   border-radius: 6px;
   border: 1px solid var(--border);

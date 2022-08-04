@@ -9,8 +9,6 @@ import GoogleAuth from '../Forms/GoogleAuth/GoogleAuth';
 function Main() {
   const user = useSelector((store) => store.user);
 
-  const [registerCheck, setRegisterCheck] = useState();
-
   return (
     <div>
       {user?.email ? (
@@ -27,7 +25,7 @@ function Main() {
         <>
           <div className="d-flex justify-content-center">
             <div>
-              <img className="rounded-circle" src="https://img.freepik.com/premium-vector/vpn-icon-with-shield-vector_116137-3682.jpg?w=360" />
+              <img className="rounded-circle" src="https://img.freepik.com/premium-vector/vpn-icon-with-shield-vector_116137-3682.jpg?w=290" />
               <div className="d-flex justify-content-center mt-3"><h3 className="text">VPN MORDA</h3></div>
               <div className="row">
                 <button className="btn" type="button">
