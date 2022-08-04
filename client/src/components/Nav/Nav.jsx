@@ -6,7 +6,7 @@ function Nav({ switchTheme, theme }) {
   const user = useSelector((state) => state.user);
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-sm navbar-dark">
       <div className="container">
         <div className="container-fluid d-flex justify-content-between">
           <Link className={`navbar-brand-${theme}`} to="/">

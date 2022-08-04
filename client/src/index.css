@@ -1,18 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image: url(https://oir.mobi/uploads/posts/2021-03/1616587093_15-p-programmirovanie-fon-20.jpg);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 :root {
   --background: #ffffff;
   --text-primary: #000;
@@ -20,15 +5,51 @@ code {
   --accent: #4e42fa;
   --border: #333;
   --form-bg: #fff;
+  --navbar: #4e42fa;
+  --image: url(https://oir.mobi/uploads/posts/2021-03/1616587093_15-p-programmirovanie-fon-20.jpg)
 }
 
 [data-theme='dark'] {
   --background: #000;
   --text-primary: #fff;
   --text-secondary: #9532bd;
-  --accent: #4e42fa;
+  --accent: #180bd3;
   --border: #808080;
   --form-bg: #191919;
+  --navbar:#180bd3;
+  --image: url(https://i.imgur.com/SbWUlgc.jpeg)
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+  color: var(--text-primary);
+  background-color: var(--navbar);
+  box-shadow: 0px 0px 12px var(--border);
+}
+
+.wrapper {
+  background-image: var(--image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.image {
+  background-image: url(https://i.imgur.com/SbWUlgc.jpeg);
 }
 
 .signForm {
@@ -52,17 +73,19 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .btn {
   background-color: var(--accent);
   border: 1px solid var(--accent);
-  color: var(--text-primary);
+  color: whitesmoke;
   margin: 16px 0;
   padding: 10px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0px 0px 6px var(--border);
 }
 
 .nav-link {
@@ -119,6 +142,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .createAcc {
@@ -129,6 +153,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .from-control {
@@ -139,6 +164,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .formControl {
@@ -149,6 +175,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .formControlEdit {
@@ -160,6 +187,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .userEditInput {
@@ -171,6 +199,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .from-control-userEdit {
@@ -181,6 +210,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .myAccText {
@@ -192,6 +222,7 @@ code {
   background: var(--background);
   color: var(--text-primary);
   text-align: center;
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .form-label {
@@ -212,6 +243,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .switchTheme {
@@ -220,15 +252,15 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .adminForm {
-  background: var(--background);
-  color: var(--text-primary);
   border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .allUser {
@@ -238,6 +270,7 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
 }
 
 .list-group-item, .userEdit {
@@ -245,4 +278,9 @@ code {
   border: 1px solid var(--border);
   background: var(--background);
   color: var(--text-primary);
+  box-shadow: 0px 0px 12px var(--border);
+}
+
+.google {
+  box-shadow: 0px 0px 12px var(--border);
 }

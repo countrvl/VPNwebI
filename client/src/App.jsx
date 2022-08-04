@@ -37,7 +37,6 @@ function App() {
   };
 
   return (
-    <>
       <div data-theme={theme}>
         <Nav switchTheme={switchTheme} theme={theme} />
         <div className="container py-5">
@@ -60,7 +59,6 @@ function App() {
           </Routes>
         </div>
       </div>
-    </>
   );
 }
 
