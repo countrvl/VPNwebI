@@ -2,13 +2,13 @@ import React, { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-function Nav({ switchTheme, theme }) {
+function Nav({ switchTheme, theme, butTheme }) {
   const user = useSelector((state) => state.user);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark">
       <div className="container">
-        <div className="container-fluid d-flex justify-content-between">
+        <div className="container-fluid d-flex justify-content-between align-items-center">
           <Link className={`navbar-brand-${theme}`} to="/">
             VPN Morda
           </Link>
@@ -44,7 +44,7 @@ function Nav({ switchTheme, theme }) {
           </div>
 
           <div className="theme">
-            <button type="button" onClick={switchTheme} className="switchTheme">тема</button>
+            <button type="button" onClick={switchTheme} className="switchTheme fs-5">{butTheme ? '🌕' : '🌑'}</button>
           </div>
         </div>
       </div>

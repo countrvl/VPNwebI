@@ -6,7 +6,7 @@
   --border: #333;
   --form-bg: #fff;
   --navbar: #4e42fa;
-  --image: url(https://oir.mobi/uploads/posts/2021-03/1616587093_15-p-programmirovanie-fon-20.jpg)
+  --image: url(https://oir.mobi/uploads/posts/2021-03/1616587093_15-p-programmirovanie-fon-20.jpg);
 }
 
 [data-theme='dark'] {
@@ -17,7 +17,7 @@
   --border: #808080;
   --form-bg: #191919;
   --navbar:#180bd3;
-  --image: url(https://i.imgur.com/SbWUlgc.jpeg)
+  --image: url(https://i.imgur.com/SbWUlgc.jpeg);
 }
 
 body {

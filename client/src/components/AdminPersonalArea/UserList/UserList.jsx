@@ -35,15 +35,13 @@ function UserList() {
   return (
 
     <div className="d-flex justify-content-center">
-      <div className="d-flex flex-column w-75 align-items-center ">
+      <div className="d-flex flex-column w-75 align-items-center">
         <h3><label htmlFor="list1">Учетные записи всех пользователей:</label></h3>
         <div className="list-group" id="list1">
           {list.map((user) => (
             <div
               key={user.id}
-              className={`list-group-item list-group-item ${
-                userId.id === user.id ? 'active' : ''
-              }`}
+              className="list-group-item list-group-item mt-2"
             >
               Имя:
               {' '}

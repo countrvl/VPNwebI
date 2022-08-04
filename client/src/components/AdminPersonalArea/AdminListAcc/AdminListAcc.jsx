@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import * as endPoints from '../../../config/endPoints';
 import { deleteAllAccsThunk } from '../../../redux/actions/allAccsActions&Thunks/allAccsThunks';
+import styles from './AdminListAcc.module.css';
 
 function AdminListAcc() {
   const { id } = useParams();
@@ -27,9 +28,9 @@ function AdminListAcc() {
   if (list.length === 0) return <p>ПУСТО</p>;
   return (
     <div className="d-flex justify-content-center">
-      <div className="list-group">
+      <div className={`list-group ${styles.scroll}`}>
         {list.map((acc) => (
-          <div className="list-group-item mt-1" key={acc.id}>
+          <div className="list-group-item mt-2" key={acc.id}>
             Логин:
             {' '}
             <strong>{acc.ac_name}</strong>

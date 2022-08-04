@@ -1,6 +1,6 @@
 import { setUser } from './userAction';
 
-export const getGoogleDataThunk = (data) => async (dispatch) => {
+export const getGoogleDataThunk = (data, navigate) => async (dispatch) => {
   const response = await fetch(`${process.env.REACT_APP_HOST}/auth/googleAuth`, {
     method: 'post',
     headers: {
@@ -11,6 +11,7 @@ export const getGoogleDataThunk = (data) => async (dispatch) => {
   });
   const userGoogle = await response.json();
   dispatch(setUser(userGoogle));
+  navigate('/pesonalarea');
 };
 
 export const just = () => {
