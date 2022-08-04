@@ -6,6 +6,7 @@ const { adminUpdateFile } = require('../function/functionsFS');
 
 const signUp = async (req, res) => {
   const { userName, password, email } = req.body;
+  console.log(userName, password, email);
 
   if (userName && password && email) {
     try {
@@ -20,7 +21,7 @@ const signUp = async (req, res) => {
         name: newUser.name,
       };
 
-      return res.json({ id: newUser.id, name: newUser.userName });
+      return res.json({ id: newUser.id, userName: newUser.userName, email: newUser.email, status: newUser.status });
     } catch (error) {
       console.error(error);
       return res.sendStatus(500);

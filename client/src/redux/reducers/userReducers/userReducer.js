@@ -1,4 +1,4 @@
-import { DELETE_USER, SET_USER } from '../types/userTypes';
+import { DELETE_USER, SET_USER } from '../../types/userTypes';
 
 // eslint-disable-next-line default-param-last
 const userReducer = (state = null, action) => {

@@ -1,5 +1,5 @@
 /* eslint-disable default-param-last */
-import { GET_ALL_USERS } from '../types/userTypes';
+import { GET_ALL_USERS } from '../../types/userTypes';
 
 const allUsersReducer = (state = [], action) => {
   const { type, payload } = action;

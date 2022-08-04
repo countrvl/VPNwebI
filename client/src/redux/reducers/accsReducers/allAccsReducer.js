@@ -1,4 +1,4 @@
-import { ADD_ALL_ACCS, GET_ALL_ACCS } from '../types/accountTypes';
+import { ADD_ALL_ACCS, GET_ALL_ACCS } from '../../types/accountTypes';
 
 /* eslint-disable default-param-last */
 const allAccsReducer = (state = [], action) => {

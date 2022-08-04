@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import accBlockCheckReducer from './accBlockCheckReducer';
-import allAccsReducer from './allAccsReducer';
-import allUsersReducer from './allUsersReducer';
+import accBlockCheckReducer from './accsReducers/accBlockCheckReducer';
+import allAccsReducer from './accsReducers/allAccsReducer';
 
 import googleAuthReducer from './googleAuthReducer';
 import loaderReducer from './loaderReducer';
-import userblockCheckReducer from './userBlockCheckReducer';
-import userReducer from './userReducer';
+import allUsersReducer from './userReducers/allUsersReducer';
+import userblockCheckReducer from './userReducers/userBlockCheckReducer';
+import userReducer from './userReducers/userReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,

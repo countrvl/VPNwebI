@@ -1,0 +1,5 @@
+.scroll {
+  height: 530px;
+  overflow-y: scroll;
+  border: 3px ridge rgb(82, 80, 255);
+}
