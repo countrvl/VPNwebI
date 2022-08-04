@@ -37,28 +37,28 @@ function App() {
   };
 
   return (
-      <div data-theme={theme}>
-        <Nav switchTheme={switchTheme} theme={theme} />
-        <div className="container py-5">
-          <Routes>
-            <Route path="/" element={<Main />} />
-            {adminStatus?.adm ? (
-              <Route path="/personalarea">
-                <Route index element={<PrivateRoute><AdminPersonalArearea /></PrivateRoute>} />
-                <Route path="userslist" element={<PrivateRoute><UserList /></PrivateRoute>} />
-                <Route path="user/:id" element={<PrivateRoute><AdminUserEdit /></PrivateRoute>} />
-                {adminStatus?.status ? <Route path="admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} /> : alert('Разблокируйте учетную запись')}
-              </Route>
-            ) : <Route path="/personalarea" element={<PrivateRoute><UserPersonalArea /></PrivateRoute>} />}
+    <div data-theme={theme} className="wrapper">
+      <Nav switchTheme={switchTheme} theme={theme} />
+      <div className="container py-5">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          {adminStatus?.adm ? (
+            <Route path="/personalarea">
+              <Route index element={<PrivateRoute><AdminPersonalArearea /></PrivateRoute>} />
+              <Route path="userslist" element={<PrivateRoute><UserList /></PrivateRoute>} />
+              <Route path="user/:id" element={<PrivateRoute><AdminUserEdit /></PrivateRoute>} />
+              {adminStatus?.status ? <Route path="admaccs/:id" element={<PrivateRoute><AdminListAcc /></PrivateRoute>} /> : alert('Разблокируйте учетную запись')}
+            </Route>
+          ) : <Route path="/personalarea" element={<PrivateRoute><UserPersonalArea /></PrivateRoute>} />}
 
-            <Route path="/accs/:id" element={<PrivateRoute><AccsEdit /></PrivateRoute>} />
-            <Route path="/myuser" element={<PrivateRoute><UserEdit /></PrivateRoute>} />
-            <Route path="/auth/signout" element={<PrivateRoute><SignOut /></PrivateRoute>} />
-            <Route path="/auth/signup" element={<SignUp />} />
-            <Route path="/auth/signin" element={<SignIn />} />
-          </Routes>
-        </div>
+          <Route path="/accs/:id" element={<PrivateRoute><AccsEdit /></PrivateRoute>} />
+          <Route path="/myuser" element={<PrivateRoute><UserEdit /></PrivateRoute>} />
+          <Route path="/auth/signout" element={<PrivateRoute><SignOut /></PrivateRoute>} />
+          <Route path="/auth/signup" element={<SignUp />} />
+          <Route path="/auth/signin" element={<SignIn />} />
+        </Routes>
       </div>
+    </div>
   );
 }
 
