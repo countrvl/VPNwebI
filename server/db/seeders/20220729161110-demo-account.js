@@ -3,8 +3,8 @@ const sha256 = require('sha256');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Accounts', [{
-      ac_name: 'Flanker',
-      pass: sha256('123'),
+      ac_name: 'vpnuser1',
+      pass: sha256('qcf73YA'),
       user_id: 1,
       status: true,
       createdAt: new Date(),
