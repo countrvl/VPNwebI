@@ -36,7 +36,7 @@ function UserList() {
 
     <div className="d-flex justify-content-center">
       <div className="d-flex flex-column w-75 align-items-center">
-        <h3><label htmlFor="list1">Учетные записи всех пользователей:</label></h3>
+        <h3><label className="text" htmlFor="list1">Учетные записи всех пользователей:</label></h3>
         <div className="list-group" id="list1">
           {list.map((user) => (
             <div

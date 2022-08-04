@@ -43,7 +43,7 @@ function UserAccs() {
 
   return (
     <div className="mt-3 d-flex flex-column align-items-center w-75">
-      <h3><label htmlFor="listAccs" className="fs-4">Мои аккаунты:</label></h3>
+      <h3><label htmlFor="listAccs" className="text fs-4">Мои аккаунты:</label></h3>
       {list.length
         ? (
           <div className={`list-group ${styles.scroll}`} id="listAccs">
