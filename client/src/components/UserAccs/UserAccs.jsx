@@ -25,22 +25,6 @@ function UserAccs() {
     dispatch(deleteAllAccsThunk(id));
   };
 
-  const changeHandler = (e) => {
-    setInput((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (user?.status) {
-      dispatch(addAllAccsThunk(input));
-    } else {
-      alert('Вы заблокированы, обратитесь к Администратору');
-    }
-  };
-
   return (
     <div className="mt-3 d-flex flex-column align-items-center w-75">
       <h3><label htmlFor="listAccs" className="text fs-4">Мои аккаунты:</label></h3>
