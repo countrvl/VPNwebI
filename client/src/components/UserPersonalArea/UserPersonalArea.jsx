@@ -34,16 +34,16 @@ function UserPersonalArea() {
   return (
     <div className="d-flex flex-column align-items-center">
       <div className="d-flex justify-content-evenly align-items-center w-75">
-        <div className="userAcc card" id="myCard" style={{ width: '20vw' }}>
-          <div className="card-body d-flex flex-column justify-content-between align-items-center">
-            <h5 className="card-title">{user.userName}</h5>
-            <div className="card-text">
+        <div className="userAcc card" id="myCard">
+          <form className="card-body p-1 d-flex flex-column justify-content-between">
+            <h5 className="text card-title fixUserInfo">{user.userName}</h5>
+            <p className="text card-text fixUserInfo">
               Email:
               {' '}
               {user.email}
-            </div>
-            <Link to="/myuser"><button type="button" className="btn btn-primary mt-2">Изменить</button></Link>
-          </div>
+            </p>
+            <Link to="/myuser" className="d-flex justify-content-center"><button type="button" className="btn btn-primary mt-2">Изменить</button></Link>
+          </form>
         </div>
         <div className="createAcc card">
           <form onSubmit={submitHandler} className="p-1 d-flex flex-column justify-content-between">
