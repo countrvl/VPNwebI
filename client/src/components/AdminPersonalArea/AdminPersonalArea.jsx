@@ -35,16 +35,16 @@ function PersonalAreaAdmin() {
   return (
     <div className="d-flex flex-column align-items-center">
       <div className="d-flex justify-content-evenly w-75">
-        <div className="card" id="myCard" style={{ width: '20vw' }}>
-          <div className="adminForm card-body d-flex flex-column justify-content-between align-items-center">
-            <h5 className="text card-title">{user.userName}</h5>
-            <div className="text card-text">
+        <div className="adminForm card" id="myCard">
+          <div className="card-body p-1 d-flex flex-column justify-content-between">
+            <h5 className="text card-title fixUserInfo">{user.userName}</h5>
+            <div className="text card-text fixUserInfo">
               Email:
               {' '}
               {user.email}
             </div>
-            <Link to="/myuser"><button type="button" className="btn btn-primary mt-2">Изменить</button></Link>
-            <Link to="/personalarea/userslist"><button type="button" className="btn btn-primary mt-2">Учётные записи</button></Link>
+            <Link to="/myuser" className="d-flex justify-content-center"><button type="button" className="btn btn-primary mt-2 fixUserInfo">Изменить</button></Link>
+            <Link to="/personalarea/userslist" className="d-flex justify-content-center"><button type="button" className="btn btn-primary mt-2 fixUserInfo">Учётные записи</button></Link>
           </div>
         </div>
         <div className="createAcc card">
