@@ -39,7 +39,7 @@ function App() {
   return (
     <div data-theme={theme} className="wrapper">
       <Nav switchTheme={switchTheme} theme={theme} />
-      <div className="container py-5">
+      <div className="container mt-5">
         <Routes>
           <Route path="/" element={<Main />} />
           {adminStatus?.adm ? (

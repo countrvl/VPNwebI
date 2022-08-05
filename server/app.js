@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const FileStore = require('session-file-store')(session);
-
+const path = require('path');
 const authRouter = require('./src/routes/auth.router');
 const lkRouter = require('./src/routes/lk.router');
 
@@ -13,6 +13,9 @@ const { PORT, COOKIE_SECRET, COOKIE_NAME, CORS_ORIGIN} = process.env;
 
 // SERVER'S SETTINGS
 app.set('cookieName', COOKIE_NAME);
+
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 
 // APP'S MIDDLEWARES
 app.use(
@@ -39,6 +42,9 @@ app.use(
 );
 
 // APP'S ROUTES
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'))
+})
 app.use('/auth', authRouter);
 app.use('/lk', lkRouter);
 
